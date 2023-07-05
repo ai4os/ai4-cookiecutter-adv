@@ -84,3 +84,9 @@ you should configure the corresponding fixtures on `tests/test_*/conftest.py`
 with the names of your files. Additionally you can configure, add and
 remove fixtures with required or optional parameters as needed by your
 functions defined at the `api.__init__.py` module.
+
+In case you do not have any checkpoint or model to test, you can use the
+script `checkpoints_example.py` to generate a dummy model checkpoint that
+can be used for testing purposes. The scripts consumes a file `train-dataset.npz`
+from _DATA_PATH_ environment variable (default: `./data`) and generates a
+checkpoint with the system timestamp at _MODELS_PATH_.
