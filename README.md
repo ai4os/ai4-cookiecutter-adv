@@ -26,8 +26,19 @@ This is what the folder structures look like:
 ```
 <your_project>
 ##############
-├── LICENSE
+├── VERSION                <- Version file indicating the version of the model 
+│
+├── LICENSE                <- License file
+│
 ├── README.md              <- The top-level README for developers using this project.
+│
+├── api
+│   ├── __init__.py        <- Main script for the integration with DEEP API
+│   ├── config.py          <- API module for loading configuration from environment
+│   ├── parsers.py         <- API module with parsers for method responses
+│   ├── schemas.py         <- API module with definition of method arguments
+│   └── utils.py           <- API module with utility functions
+│
 ├── data
 │   └── raw                <- The original, immutable data dump.
 │
@@ -47,9 +58,10 @@ This is what the folder structures look like:
 │
 ├── requirements.txt       <- The requirements file for reproducing the analysis environment, e.g.
 │                             generated with `pip freeze > requirements.txt`
-├── test-requirements.txt  <- The requirements file for the test environment
+├── requirements-test.txt  <- The requirements file for the test environment
 │
-├── setup.py               <- makes project pip installable (pip install -e .) so {{cookiecutter.__repo_name}} can be imported
+├── pyproject.toml         <- makes project pip installable (pip install -e .) so {{cookiecutter.__repo_name}} can be imported
+│
 ├── {{cookiecutter.__repo_name}}    <- Source code for use in this project.
 │   ├── __init__.py        <- Makes {{cookiecutter.__repo_name}} a Python module
 │   │
@@ -59,14 +71,10 @@ This is what the folder structures look like:
 │   ├── features           <- Scripts to turn raw data into features for modeling
 │   │   └── build_features.py
 │   │
-│   ├── models             <- Scripts to train models and make predictions
-│   │   └── api.py         <- Main script for the integration with DEEP API
-│   │
-│   ├── tests              <- Scripts to perfrom code testing
-│   │
 │   └── visualization      <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
 │
+├── tests                  <- Scripts to perform code testing
 └── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
 
 DEEP-OC-<your_project>

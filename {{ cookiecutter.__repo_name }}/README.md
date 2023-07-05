@@ -37,7 +37,7 @@ The associated Docker container for this module can be found in {{ cookiecutter.
 │
 ├── requirements.txt       <- The requirements file for reproducing the analysis environment, e.g.
 │                             generated with `pip freeze > requirements.txt`
-├── test-requirements.txt  <- The requirements file for the test environment
+├── requirements-test.txt  <- The requirements file for the test environment
 │
 ├── setup.py               <- makes project pip installable (pip install -e .) so {{cookiecutter.__repo_name}} can be imported
 ├── {{cookiecutter.__repo_name}}    <- Source code for use in this project.
@@ -59,3 +59,28 @@ The associated Docker container for this module can be found in {{ cookiecutter.
 │
 └── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
 ```
+
+
+
+## Testing
+
+Testing process is automated by tox library. You can check the environments
+configured to be tested by running `tox --listenvs`. If you are missing one
+of the python environments configured to be tested (e.g. py310, py39) and
+you are using `conda` for managing your virtual environments, consider using
+`tox-conda` to automatically manage all python installation on your testing
+virtual environment.
+
+Tests are implemented following [pytest](https://docs.pytest.org) framework.
+Fixtures and parametrization are placed inside `conftest.py` files meanwhile
+assertion tests are located on `test_*.py` files.
+
+The folder `tests/datasets` should contain minimalistic but representative
+datasets to be used for testing. In a similar way, `tests/models` should
+contain simple models for testing that can fit on your code repository.
+
+After adding your dataset and models to the corresponding testing folders,
+you should configure the corresponding fixtures on `tests/test_*/conftest.py`
+with the names of your files. Additionally you can configure, add and
+remove fixtures with required or optional parameters as needed by your
+functions defined at the `api.__init__.py` module.
