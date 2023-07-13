@@ -1,20 +1,18 @@
-# Python MNIST sample project for Model
+{{cookiecutter.project_name}}
+==============================
 
-## TODO: Edit this model description example using your own project details
+The structure here:
 
-Simple project sample to build feedforward neural network models from scratch
-with Tensorflow and keras to recognize handwritten digit images.
-
-The deep learning model — one of the most basic artificial neural networks
-that resembles the original multi-layer perceptron — will learn to classify
-digits from 0 to 9 from the MNIST dataset.
-
-Based on the image inputs and their labels (supervised learning), the neural
-network is trained to learn their features using forward propagation and
-backpropagation (reverse-mode differentiation). The final output of the
-network is a vector of 10 scores — one for each handwritten digit image. You
-will also evaluate how good the model is at classifying the images on the
-test set.
-
-Based on "Deep learning on MNIST" at https://github.com/numpy/numpy-tutorials
-and "Tensorflow tutorials" https://www.tensorflow.org/tutorials/keras.
+```
+├── dataset            <- Scripts to prepare a dataset or generate data
+│   └── make_dataset.py
+│
+├── models             <- Scripts to describe and create various AI models
+|
+├── visualization      <- Scripts to create exploratory and results oriented visualizations
+│   └── visualize.py
+|
+├── config.py          <- Module to define CONSTANTS used across the AI-model python package
+├── predict.py         <- Module to describe inference pipeline
+├── train.py           <- Module to describe training pipeline
+```

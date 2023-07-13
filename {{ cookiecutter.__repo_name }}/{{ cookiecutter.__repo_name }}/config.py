@@ -1,4 +1,5 @@
-"""Module to define CONSTANTS used across the model package.
+"""
+   Module to define CONSTANTS used across the AI-model package
 """
 import os
 

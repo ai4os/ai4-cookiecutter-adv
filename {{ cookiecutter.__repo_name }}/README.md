@@ -16,8 +16,10 @@ The associated Docker container for this module can be found in {{ cookiecutter.
 
 ## Project structure
 ```
-├── LICENSE
-├── README.md              <- The top-level README for developers using this project.
+├── Jenkinsfile            <- Describes basic Jenkins CI/CD pipeline
+├── LICENSE                <- License file
+├── README.md              <- The top-level README for developers using this project
+|
 ├── data
 │   └── raw                <- The original, immutable data dump.
 │
@@ -34,30 +36,34 @@ The associated Docker container for this module can be found in {{ cookiecutter.
 │
 ├── reports                <- Generated analysis as HTML, PDF, LaTeX, etc.
 │   └── figures            <- Generated graphics and figures to be used in reporting
+|
+├── tests                  <- Scripts to perfrom code testing
 │
 ├── requirements.txt       <- The requirements file for reproducing the analysis environment, e.g.
 │                             generated with `pip freeze > requirements.txt`
 ├── requirements-test.txt  <- The requirements file for the test environment
 │
-├── setup.py               <- makes project pip installable (pip install -e .) so {{cookiecutter.__repo_name}} can be imported
+├── pyproject.toml         <- defines build system requirements of Python projects (e.g. pip install -e .)
+|
 ├── {{cookiecutter.__repo_name}}    <- Source code for use in this project.
-│   ├── __init__.py        <- Makes {{cookiecutter.__repo_name}} a Python module
+│   ├── __init__.py        <- Makes {{cookiecutter.__repo_name}} a Python (sub)package
 │   │
 │   ├── dataset            <- Scripts to download or generate data
 │   │   └── make_dataset.py
 │   │
-│   ├── features           <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
 │   ├── models             <- Scripts to train models and make predictions
-│   │   └── api.py         <- Main script for the integration with DEEP API
 │   │
-│   ├── tests              <- Scripts to perfrom code testing
-│   │
-│   └── visualization      <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
+│   ├── visualization      <- Scripts to create exploratory and results oriented visualizations
+│   |   └── visualize.py
+|   |
+|   ├── config.py          <- Module to define CONSTANTS used across the AI-model python package
+|   ├── predict.py         <- Module to describe inference pipeline
+|   └── train.py           <- Module to describe training pipeline
 │
-└── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
+├── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
+|
+└── VERSION                <- file to define software version
+
 ```
 
 
