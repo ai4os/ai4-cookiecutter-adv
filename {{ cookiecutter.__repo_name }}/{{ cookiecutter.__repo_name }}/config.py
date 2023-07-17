@@ -1,9 +1,11 @@
+"""Module to define CONSTANTS used across the AI-model package
 """
-   Module to define CONSTANTS used across the AI-model package
-"""
+import logging
 import os
 
-# Example on how to load environment variables
-LABEL_DIMENSIONS = int(os.getenv("LABEL_DIMENSIONS", default="10"))
-IMAGE_SIZE = int(os.getenv("IMAGE_SIZE", default="28"))
-INPUT_SHAPE = (IMAGE_SIZE, IMAGE_SIZE, 1)
+# configure logging
+log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+logging.basicConfig(level=logging.INFO, format=log_fmt)
+
+# EXAMPLE on how to load environment variables
+MY_PARAMETER_INT = int(os.getenv("MY_PARAMETER_INT", default="10"))
