@@ -3,7 +3,7 @@
 import marshmallow
 from webargs import ValidationError, fields, validate
 
-from . import config, parsers, utils
+from . import config, responses, utils
 
 
 class Checkpoint(fields.String):
@@ -74,7 +74,7 @@ class PredArgsSchema(marshmallow.Schema):
             "location": "headers",
         },
         required=True,
-        validate=validate.OneOf(parsers.content_types),
+        validate=validate.OneOf(lists(responses.content_types)),
     )
 
 

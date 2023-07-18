@@ -15,7 +15,7 @@ from aiohttp.web import HTTPException
 import {{ cookiecutter.__repo_name }} as ml_model
 from {{ cookiecutter.__repo_name }}.predict import predict
 
-from . import config, parsers, schemas, utils
+from . import config, responses, schemas, utils
 
 logger = logging.getLogger(__name__)
 
@@ -31,12 +31,13 @@ def get_metadata():
     """
     try:
         metadata = {
-            "authors": [config.MODEL_METADATA.get("author_email")],
-            "description": config.MODEL_METADATA.get("summary"),
-            "license": config.MODEL_METADATA.get("license"),
-            "version": config.MODEL_METADATA.get("version"),
-            "checkpoints": utils.ls_models(),
-            "datasets": utils.ls_datasets(),
+            "Author": [config.MODEL_METADATA.get("Author")],
+            "Author-email": [config.MODEL_METADATA.get("Author-email")],
+            "Summary": config.MODEL_METADATA.get("Summary"),
+            "License": config.MODEL_METADATA.get("License"),
+            "Version": config.MODEL_METADATA.get("Version"),
+            "Checkpoints": utils.ls_models(),
+            "Datasets": utils.ls_datasets(),
         }
         logger.debug("Package model metadata: %s", metadata)
         return metadata
@@ -71,7 +72,7 @@ def predict(checkpoint, input_file, accept, **options):
         logger.debug("Using options: %s", options)
         result = ml_model.predict(model, input_file.filename, **options)
         logger.debug("Using parser for: %s", accept)
-        return parsers.response_parsers[accept](result)
+        return responses.content_types[accept](result)
     except Exception as err:
         raise HTTPException(reason=err) from err
 

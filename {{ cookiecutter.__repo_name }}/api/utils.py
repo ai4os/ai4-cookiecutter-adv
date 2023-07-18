@@ -57,16 +57,3 @@ def train_arguments(schema):
         return func  # Decorator that returns same function
     return inject_function_schema
 
-
-def generate_callbacks(ckpt_name):
-    """Generator for for training callbacks. It includes the generation
-    of model checkpoints to be saved at the configured models path.
-
-    Arguments:
-        ckpt_name -- Models folder name for the ModelCheckpoint path.
-
-    Returns:
-        Tensorflow training callbacks list.
-    """
-    checkpoint_path = config.MODELS_PATH / ckpt_name
-    return [callbacks.ModelCheckpoint(checkpoint_path, verbose=1)]
