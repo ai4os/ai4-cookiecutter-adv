@@ -4,15 +4,16 @@
 The structure here:
 
 ```
-├── dataset            <- Scripts to prepare a dataset or generate data
-│   └── make_dataset.py
+├── dataset            <- Subpackage to prepare a dataset or generate data
+│   └── __init__.py    <- Main methods for public re-use, e.g. mkdata()
 │
-├── models             <- Scripts to describe and create various AI models
+├── models             <- Subpackage to describe and create various AI models, train them and predict
+│   └── __init__.py    <- Main methods for public re-use, e.g. create_model(), predict(), train()
 |
-├── visualization      <- Scripts to create exploratory and results oriented visualizations
+├── visualization      <- Scripts for exploratory and results oriented visualizations
 │   └── visualize.py
 |
 ├── config.py          <- Module to define CONSTANTS used across the AI-model python package
-├── predict.py         <- Module to describe inference pipeline
-├── train.py           <- Module to describe training pipeline
+└── __init__.py        <- Main methods for public re-use, e.g. imports mkdata(), predict(), train() (see above)
+
 ```

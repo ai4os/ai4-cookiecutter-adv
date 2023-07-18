@@ -13,6 +13,7 @@ import tensorflow as tf
 from aiohttp.web import HTTPException
 
 import {{ cookiecutter.__repo_name }} as ml_model
+from {{ cookiecutter.__repo_name }}.predict import predict
 
 from . import config, parsers, schemas, utils
 
