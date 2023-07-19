@@ -74,7 +74,7 @@ class PredArgsSchema(marshmallow.Schema):
             "location": "headers",
         },
         required=True,
-        validate=validate.OneOf(lists(responses.content_types)),
+        validate=validate.OneOf(list(responses.content_types)),
     )
 
 

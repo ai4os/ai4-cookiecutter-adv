@@ -1,8 +1,10 @@
 """Configuration loader for DEEPaaS API."""
 import os
+import logging
 from importlib.metadata import metadata as _metadata
 from pathlib import Path, PurePath
 
+# PATHS:
 # base path for the local repository
 BASE_PATH = Path(__file__).resolve().parents[1]
 # default path for the data
@@ -19,3 +21,9 @@ MODEL_METADATA = _metadata(MODEL_NAME) #.json
 # https://stackoverflow.com/questions/75249518/right-way-to-publish-authors-on-pypi-from-setuptools/75361691#75361691
 if 'Author' not in MODEL_METADATA.keys():
     MODEL_METADATA['Author'] = MODEL_METADATA['Author-email'].split()[0]
+    
+# LOGGING:
+# configure logging level accross API modules can be setup via API_LOG_LEVEL, 
+# options: DEBUG, INFO(default), WARNING, ERROR, CRITICAL
+env_log_level = os.getenv('API_LOG_LEVEL', 'INFO')
+log_level = getattr(logging, env_log_level.upper())

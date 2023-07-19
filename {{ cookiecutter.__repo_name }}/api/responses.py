@@ -1,9 +1,10 @@
 """Module for defining custom API response parsers and content types.
 """
 import logging
+from . import config
 
 logger = logging.getLogger(__name__)
-
+logger.setLevel(config.log_level)
 
 def json_response(values, **extra_values):
     """Converts the prediction or training results into json return format.

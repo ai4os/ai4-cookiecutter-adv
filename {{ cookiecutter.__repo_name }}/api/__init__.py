@@ -12,12 +12,12 @@ import time
 import tensorflow as tf
 from aiohttp.web import HTTPException
 
-import {{ cookiecutter.__repo_name }} as ml_model
-from {{ cookiecutter.__repo_name }}.predict import predict
+import {{ cookiecutter.__repo_name }} as aimodel
 
 from . import config, responses, schemas, utils
 
 logger = logging.getLogger(__name__)
+logger.setLevel(config.log_level)
 
 
 def get_metadata():
@@ -70,7 +70,7 @@ def predict(checkpoint, input_file, accept, **options):
         model = tf.keras.models.load_model(checkpoint)
         logger.debug("Predictions from input_file: %s", input_file)
         logger.debug("Using options: %s", options)
-        result = ml_model.predict(model, input_file.filename, **options)
+        result = aimodel.predict(model, input_file.filename, **options)
         logger.debug("Using parser for: %s", accept)
         return responses.content_types[accept](result)
     except Exception as err:
@@ -109,7 +109,7 @@ def train(checkpoint, dataset, **options):
         ckpt_name = f"{time.strftime('%Y%m%d-%H%M%S')}.cp.ckpt"
         options["callbacks"] = utils.generate_callbacks(ckpt_name)
         logger.debug("Using options: %s", options)
-        result = ml_model.training(model, dataset, **options)
+        result = aimodel.train(model, dataset, **options)
         return {"new_checkpoint": ckpt_name, **result.history}
     except Exception as err:
         raise HTTPException(reason=err) from err

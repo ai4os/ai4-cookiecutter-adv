@@ -8,6 +8,7 @@ from keras import callbacks
 from . import config
 
 logger = logging.getLogger(__name__)
+logger.setLevel(config.log_level)
 
 
 def ls_models():
