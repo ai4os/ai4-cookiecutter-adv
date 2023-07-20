@@ -12,22 +12,13 @@ class Checkpoint(fields.String):
     """
 
     def _deserialize(self, value, attr, data, **kwargs):
-        if value not in utils.ls_models():
+        if value not in utils.ls_dir(config.MODELS_PATH):
             raise ValidationError(f"Checkpoint `{value}` not found.")
         return str(config.MODELS_PATH / value)
 
 
-class Dataset(fields.String):
-    """Field that takes a string and validates against current available
-    data files at config.DATA_PATH.
-    """
-
-    def _deserialize(self, value, attr, data, **kwargs):
-        if value not in utils.ls_datasets():
-            raise ValidationError(f"Dataset `{value}` not found.")
-        return str(config.DATA_PATH / value)
-
-
+# EXAMPLE of Prediction Args description
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 class PredArgsSchema(marshmallow.Schema):
     """Prediction arguments schema for api.predict function."""
 
@@ -38,46 +29,31 @@ class PredArgsSchema(marshmallow.Schema):
 
     checkpoint = Checkpoint(
         metadata={
-            "description": "Checkpoint from metadata to use for predictions.",
+            "description": "Checkpoint to use for predictions (Check metadata for the list of available checkpoints).",
         },
-        required=True,
+        required=False,
     )
 
     input_file = fields.Field(
         metadata={
-            "description": "NPY file with images data for predictions.",
+            "description": "Data file to execute prediction on.",
             "type": "file",
             "location": "form",
         },
         required=True,
     )
 
-    batch_size = fields.Integer(
-        metadata={
-            "description": "Number of samples per batch.",
-        },
-        required=False,
-        validate=validate.Range(min=1),
-    )
-
-    steps = fields.Integer(
-        metadata={
-            "description": "Steps before prediction round is finished.",
-        },
-        required=False,
-        validate=validate.Range(min=1),
-    )
-
     accept = fields.String(
         metadata={
-            "description": "Return format for method response.",
+            "description": "Return format for the response.",
             "location": "headers",
         },
         required=True,
         validate=validate.OneOf(list(responses.content_types)),
     )
 
-
+# EXAMPLE of Training Args description
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 class TrainArgsSchema(marshmallow.Schema):
     """Training arguments schema for api.train function."""
 
@@ -86,18 +62,20 @@ class TrainArgsSchema(marshmallow.Schema):
         # pylint: disable=too-few-public-methods
         ordered = True
 
-    checkpoint = Checkpoint(
+
+    dataset = fields.String(
         metadata={
-            "description": "Checkpoint from metadata to use for predictions.",
+            "description": "Path to the training dataset.",
         },
-        required=True,
+        required=False,
     )
 
-    dataset = Dataset(
+    batch_size = fields.Integer(
         metadata={
-            "description": "Dataset name from metadata for training input.",
+            "description": "Number of samples per batch.",
         },
-        required=True,
+        required=False,
+        validate=validate.Range(min=0),
     )
 
     epochs = fields.Integer(
@@ -107,23 +85,6 @@ class TrainArgsSchema(marshmallow.Schema):
         required=False,
         load_default=1,
         validate=validate.Range(min=1),
-    )
-
-    initial_epoch = fields.Integer(
-        metadata={
-            "description": "Epoch at which to start training.",
-        },
-        required=False,
-        load_default=0,
-        validate=validate.Range(min=0),
-    )
-
-    steps_per_epoch = fields.Integer(
-        metadata={
-            "description": "Steps before declaring an epoch finished.",
-        },
-        required=False,
-        validate=validate.Range(min=0),
     )
 
     shuffle = fields.Boolean(
@@ -136,27 +97,11 @@ class TrainArgsSchema(marshmallow.Schema):
 
     validation_split = fields.Float(
         metadata={
-            "description": "Fraction of the data to be used as validation.",
+            "description": "Fraction of the data to be used for validation.",
         },
         required=False,
         load_default=0.0,
         validate=validate.Range(min=0.0, max=1.0),
-    )
-
-    validation_steps = fields.Integer(
-        metadata={
-            "description": "Steps to draw before stopping on validation.",
-        },
-        required=False,
-        validate=validate.Range(min=0),
-    )
-
-    validation_batch_size = fields.Integer(
-        metadata={
-            "description": "Number of samples per validation batch.",
-        },
-        required=False,
-        validate=validate.Range(min=0),
     )
 
     validation_freq = fields.Integer(

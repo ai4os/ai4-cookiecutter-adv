@@ -3,34 +3,59 @@
 import logging
 import sys
 
-from keras import callbacks
-
 from . import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.log_level)
 
 
-def ls_models():
-    """Utility to return a list of models available in `models` folder.
-
+def ls_dirs(path):
+    """Utility to return a list of files available in `path` folder.
+    Args:
+        path: Directory path to scan
     Returns:
-        A list of strings in the format {submodel}-{timestamp}.
+        A list of strings for found subdirectories.
     """
-    logger.debug("Scanning at: %s", config.MODELS_PATH)
-    dirscan = (x.name for x in config.MODELS_PATH.iterdir() if x.is_dir())
+    logger.debug("Scanning at: %s", path)
+    dirscan = (x.name for x in path.iterdir() if x.is_dir())
     return sorted(dirscan)
 
 
-def ls_datasets():
-    """Utility to return a list of datasets available in `data` folder.
+def ls_files(path, pattern):
+    """Utility to return a list of files available in `path` folder.
 
+    Args:
+        path: Directory path to scan
+        pattern: File pattern to filter found files. 
+            See glob.glob() python function for possible patterns.
     Returns:
-        A list of strings in the format {id}-{type}.npz.
+        A list of strings for files found according to the pattern.
     """
-    logger.debug("Scanning at: %s", config.DATA_PATH)
-    dirscan = (x.name for x in config.DATA_PATH.glob("*.npz"))
+    logger.debug("Scanning at: %s", path)
+    dirscan = (x.name for x in path.glob(pattern))
     return sorted(dirscan)
+
+
+def copy_remote(frompath, topath):
+    """Copy e.g. remote NextCloud folder in your local deployment or viceversa.
+
+    Example:
+        copy_remote('rshare:/data/images', '/srv/myapp/data/images')
+
+    Args:
+      frompath (str, pathlib.Path): Source folder to be copied
+      topath (str, pathlib.Path): Destination folder
+    """
+
+    command = ["rclone", "copy", f"{frompath}", f"{topath}"]
+    result = subprocess.Popen(command,
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE,
+                              text=True)
+    output, error = result.communicate()
+    if error:
+        logger.error(f"Error while copying from/to remote directory: {error}")
+    return output, error
 
 
 def generate_arguments(schema):

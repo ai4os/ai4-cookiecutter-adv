@@ -36,8 +36,7 @@ def get_metadata():
             "Summary": config.MODEL_METADATA.get("Summary"),
             "License": config.MODEL_METADATA.get("License"),
             "Version": config.MODEL_METADATA.get("Version"),
-            "Checkpoints": utils.ls_models(),
-            "Datasets": utils.ls_datasets(),
+            "Checkpoints": utils.ls_dirs(config.MODELS_PATH),
         }
         logger.debug("Package model metadata: %s", metadata)
         return metadata
@@ -45,19 +44,16 @@ def get_metadata():
         raise HTTPException(reason=err) from err
 
 
+#def warm():
+#    """Function to run preparation phase before anything else can start"""
+
+
 @utils.predict_arguments(schema=schemas.PredArgsSchema)
-def predict(checkpoint, input_file, accept, **options):
+def predict(**options):
     """Performs {model} prediction from given input data and parameters.
 
     Arguments:
-        checkpoint -- Model from checkpoint to use for predicting values.
-        input_file -- Input data file to perform predictions from model.
-        accept -- Response parser type.
         **options -- Arbitrary keyword arguments from PredArgsSchema.
-
-    Options:
-        batch_size -- Number of samples per batch.
-        steps -- Steps before prediction round is finished.
 
     Raises:
         HTTPException: Unexpected errors aim to return 50X
@@ -65,14 +61,11 @@ def predict(checkpoint, input_file, accept, **options):
     Returns:
         The predicted model values or files.
     """
+    logger.debug("Using options: %s", options)
     try:
-        logger.debug("Using model %s for predictions", checkpoint)
-        model = tf.keras.models.load_model(checkpoint)
-        logger.debug("Predictions from input_file: %s", input_file)
-        logger.debug("Using options: %s", options)
-        result = aimodel.predict(model, input_file.filename, **options)
-        logger.debug("Using parser for: %s", accept)
-        return responses.content_types[accept](result)
+        # call your AI model predict() method
+        result = aimodel.predict(**options)
+        return responses.content_types[options["accept"]](result)
     except Exception as err:
         raise HTTPException(reason=err) from err
 
@@ -82,19 +75,7 @@ def train(checkpoint, dataset, **options):
     """Performs {model} training from given input data and parameters.
 
     Arguments:
-        checkpoint -- Model from checkpoint to train with the input files.
-        dataset -- Dataset name with images and labels to use for training.
         **options -- Arbitrary keyword arguments from TrainArgsSchema.
-
-    Options:
-        epochs -- Number of epochs to train the model.
-        initial_epoch -- Epoch at which to start training.
-        steps_per_epoch -- Steps before declaring an epoch finished.
-        shuffle -- Shuffle the training data before each epoch.
-        validation_split -- Fraction of the data to be used as validation.
-        validation_steps -- Steps to draw before stopping on validation.
-        validation_batch_size -- Number of samples per validation batch.
-        validation_freq -- Training epochs to run before validation.
 
     Raises:
         HTTPException: Unexpected errors aim to return 50X
@@ -102,14 +83,10 @@ def train(checkpoint, dataset, **options):
     Returns:
         Parsed history/summary of the training process.
     """
+    logger.debug("Using options: %s", options)
     try:
-        logger.debug("Using model %s for training", checkpoint)
-        model = tf.keras.models.load_model(checkpoint)
-        logger.debug("Training from dataset: %s", dataset)
-        ckpt_name = f"{time.strftime('%Y%m%d-%H%M%S')}.cp.ckpt"
-        options["callbacks"] = utils.generate_callbacks(ckpt_name)
-        logger.debug("Using options: %s", options)
+        # call your AI model train() method
         result = aimodel.train(model, dataset, **options)
-        return {"new_checkpoint": ckpt_name, **result.history}
+        return {"result":result}
     except Exception as err:
         raise HTTPException(reason=err) from err
