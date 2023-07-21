@@ -3,13 +3,12 @@
 For more information about how to edit the module see, take a look at the
 docs [1] and at a canonical exemplar module [2].
 
-[1]: https://docs.deep-hybrid-datacloud.eu/
+[1]: https://docs.ai4eosc.eu/
 [2]: https://github.com/deephdc/demo_app
 """
 import logging
 import time
 
-import tensorflow as tf
 from aiohttp.web import HTTPException
 
 import {{ cookiecutter.__repo_name }} as aimodel
@@ -31,9 +30,9 @@ def get_metadata():
     """
     try:
         metadata = {
-            "Author": [config.MODEL_METADATA.get("Author")],
-            "Author-email": [config.MODEL_METADATA.get("Author-email")],
-            "Summary": config.MODEL_METADATA.get("Summary"),
+            "Author": [config.MODEL_METADATA.get("Author").replace('\"','')],
+            "Author-email": [config.MODEL_METADATA.get("Author-email").replace('\"','')],
+            "Description": config.MODEL_METADATA.get("Summary"),
             "License": config.MODEL_METADATA.get("License"),
             "Version": config.MODEL_METADATA.get("Version"),
             "Checkpoints": utils.ls_dirs(config.MODELS_PATH),
@@ -50,7 +49,7 @@ def get_metadata():
 
 @utils.predict_arguments(schema=schemas.PredArgsSchema)
 def predict(**options):
-    """Performs {model} prediction from given input data and parameters.
+    """Performs model prediction from given input data and parameters.
 
     Arguments:
         **options -- Arbitrary keyword arguments from PredArgsSchema.
@@ -65,14 +64,14 @@ def predict(**options):
     try:
         # call your AI model predict() method
         result = aimodel.predict(**options)
-        return responses.content_types[options["accept"]](result)
+        return responses.content_types[options["accept"]](result, **options)
     except Exception as err:
         raise HTTPException(reason=err) from err
 
 
 @utils.train_arguments(schema=schemas.TrainArgsSchema)
-def train(checkpoint, dataset, **options):
-    """Performs {model} training from given input data and parameters.
+def train(**options):
+    """Performs model training from given input data and parameters.
 
     Arguments:
         **options -- Arbitrary keyword arguments from TrainArgsSchema.
@@ -86,7 +85,7 @@ def train(checkpoint, dataset, **options):
     logger.debug("Using options: %s", options)
     try:
         # call your AI model train() method
-        result = aimodel.train(model, dataset, **options)
-        return {"result":result}
+        result = aimodel.train(**options)
+        return result
     except Exception as err:
         raise HTTPException(reason=err) from err

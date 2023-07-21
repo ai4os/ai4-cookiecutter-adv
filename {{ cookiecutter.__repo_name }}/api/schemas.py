@@ -75,6 +75,7 @@ class TrainArgsSchema(marshmallow.Schema):
             "description": "Number of samples per batch.",
         },
         required=False,
+        load_default=8,
         validate=validate.Range(min=0),
     )
 
@@ -97,10 +98,10 @@ class TrainArgsSchema(marshmallow.Schema):
 
     validation_split = fields.Float(
         metadata={
-            "description": "Fraction of the data to be used for validation.",
+            "description": "Fraction of the data to be used for validation (0 .. 1).",
         },
         required=False,
-        load_default=0.0,
+        load_default=0.1,
         validate=validate.Range(min=0.0, max=1.0),
     )
 
