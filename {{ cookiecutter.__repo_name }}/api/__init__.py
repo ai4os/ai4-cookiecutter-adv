@@ -59,7 +59,7 @@ def predict(**options):
         HTTPException: Unexpected errors aim to return 50X
 
     Returns:
-        The predicted model values or files.
+        The predicted model values (dict or str) or files.
     """
     logger.debug("Using options: %s", options)
     try:

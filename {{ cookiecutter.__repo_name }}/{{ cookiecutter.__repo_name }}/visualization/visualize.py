@@ -1,4 +1,4 @@
-"""Module for exploratory and results oriented visualizations
+"""Script for exploratory and results oriented visualizations
 """
 
 import logging

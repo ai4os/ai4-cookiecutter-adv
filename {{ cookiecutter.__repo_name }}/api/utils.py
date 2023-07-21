@@ -10,7 +10,7 @@ logger.setLevel(config.log_level)
 
 
 def ls_dirs(path):
-    """Utility to return a list of files available in `path` folder.
+    """Utility to return a list of directories available in `path` folder.
     Args:
         path: Directory path to scan
     Returns:

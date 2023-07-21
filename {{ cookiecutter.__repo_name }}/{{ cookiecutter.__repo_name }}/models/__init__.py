@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 
 # create model
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 def create_model(**kwargs):
     """Main/public method to create AI model
     """
@@ -19,6 +20,7 @@ def create_model(**kwargs):
     return model
 
 # predict
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 def predict(**kwargs):
     """Main/public method to perform prediction
     """
@@ -27,12 +29,13 @@ def predict(**kwargs):
     # choose AI model, load weights
     
     # return results of prediction
-    predict_result = {'status': 'not implemented'}
+    predict_result = {'result': 'not implemented'}
     logger.debug(f"[predict()]: {predict_result}")
 
     return predict_result
 
 # train
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 def train(**kwargs):
     """Main/public method to perform training
     """
@@ -46,7 +49,7 @@ def train(**kwargs):
     # describe training steps
 
     # return training results
-    train_result = {'status': 'not implemented'}
+    train_result = {'result': 'not implemented'}
     logger.debug(f"[train()]: {train_result}")
     
     return train_result

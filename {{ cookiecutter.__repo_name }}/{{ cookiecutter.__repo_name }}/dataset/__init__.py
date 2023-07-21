@@ -8,6 +8,7 @@ import {{ cookiecutter.__repo_name }}.config as cfg
 logger = logging.getLogger(__name__)
 logger.setLevel(cfg.log_level)
 
+# = HAVE TO MODIFY FOR YOUR NEEDS =
 def mkdata(input_filepath, output_filepath):
     """ Main/public function to run data processing to turn raw data
         from (data/raw) into cleaned data ready to be analyzed.
