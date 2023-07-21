@@ -63,16 +63,17 @@ This is what the folder structures look like:
 ├── pyproject.toml         <- makes project pip installable (pip install -e .) so {{cookiecutter.__repo_name}} can be imported
 │
 ├── {{cookiecutter.__repo_name}}    <- Source code for use in this project.
-│   ├── __init__.py        <- Makes {{cookiecutter.__repo_name}} a Python module
+│   ├── dataset            <- Subpackage to prepare a dataset or generate data
+│   │   └── __init__.py    <- Main methods for public re-use, e.g. mkdata()
 │   │
-│   ├── dataset            <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features           <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   └── visualization      <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
+│   ├── models             <- Subpackage to describe and create various AI models, build train and predict pipelines
+│   │   └── __init__.py    <- Main methods for public re-use, e.g. create_model(), predict(), train()
+│   |
+│   ├── visualization      <- Scripts for exploratory and results oriented visualizations
+│   │   └── visualize.py
+│   |
+│   ├── config.py          <- Module to define CONSTANTS used across the AI-model python package
+│   └── __init__.py        <- Main methods for public re-use, e.g. imports mkdata(), predict(), train() (see above)
 │
 ├── tests                  <- Scripts to perform code testing
 └── tox.ini                <- tox file with settings for running tox; see tox.testrun.org

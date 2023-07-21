@@ -1,16 +1,14 @@
 # Dockerfile may have following Arguments:
 # tag - tag for the Base image, (e.g. 2.9.1 for tensorflow)
 # branch - user repository branch to clone (default: master, another option: test)
-# jlab - if to install JupyterLab (true) or not (false)
-# oneclient_ver - version of oneclient to install (e.g. 19.02.0.rc2-1~bionic)
 #
 # To build the image:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> --build-arg arg=value .
 # or using default args:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> .
 #
-# [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside the
-# Jenkinsfile, not here!
+# [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside
+# the Jenkinsfile, not here!
 
 ARG tag={{ cookiecutter.baseimage_cpu_tag }}
 
@@ -23,9 +21,6 @@ LABEL version='{{ cookiecutter.app_version }}'
 
 # What user branch to clone [!]
 ARG branch=master
-
-# Oneclient version, has to match OneData Provider and Linux version
-ARG oneclient_ver=19.02.0.rc2-1~bionic
 
 # Install Ubuntu packages
 # - gcc is needed in Pytorch images because deepaas installation might break otherwise (see docs) (it is already installed in tensorflow images)
@@ -61,16 +56,10 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
-# INSTALL oneclient for ONEDATA
-RUN curl -sS  http://get.onedata.org/oneclient-1902.sh  | bash -s -- oneclient="$oneclient_ver" && \
-    mkdir -p /mnt/onedata && \
-    rm -rf /var/lib/apt/lists/*
-
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
 
-# EXPERIMENTAL: install deep-start script
-# N.B.: This repository also contains run_jupyter.sh
+# Install deep-start script
 RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
     ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start
 
