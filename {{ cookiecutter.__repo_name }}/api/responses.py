@@ -1,5 +1,6 @@
 """Module for defining custom API response parsers and content types.
 """
+import io
 import logging
 from fpdf import FPDF
 from . import config
@@ -8,20 +9,20 @@ logger = logging.getLogger(__name__)
 logger.setLevel(config.log_level)
 
 
-def json_response(result, **extra_values):
+def json_response(result, **options):
     """Converts the prediction or training results into json return format.
 
     Arguments:
         result -- Result value from predict call, expected either dict or str
           (see https://docs.deep-hybrid-datacloud.eu/projects/deepaas/en/stable/user/v2-api.html).
-        extra_values -- Not used, added for illustration purpose.
+        options -- Not used, added for illustration purpose.
 
     Returns:
         Converted values into json dictionary format.
     """
     logger.debug(f"Response result: {result}")
     logger.debug(f"Response result, type: {type(result)}")
-    logger.debug(f"Response options: {extra_values}")
+    logger.debug(f"Response options: {options}")
     
     if isinstance(result, dict) or isinstance(result, str):
         return result
@@ -31,13 +32,13 @@ def json_response(result, **extra_values):
 
 # EXAMPLE FUNCTION on how to return e.g. PDF document with the output of the predict() method
 # = HAVE TO MODIFY FOR YOUR NEEDS =
-def pdf_response(result, **extra_values):
+def pdf_response(result, **options):
     """Converts the prediction or training results into PDF format.
 
     Arguments:
         result -- Result value from predict call, normally expected either dict or str
           (see https://docs.deep-hybrid-datacloud.eu/projects/deepaas/en/stable/user/v2-api.html).
-        extra_values -- input parameter dictionary
+        options -- dictionary for input parameters
 
     Returns:
         Converted values into pdf buffer format.
@@ -45,7 +46,7 @@ def pdf_response(result, **extra_values):
 
     logger.debug(f"Response result  (PDF): {result}")
     logger.debug(f"Response result, type: {type(result)}")
-    logger.debug(f"Response options (PDF): {extra_values}")
+    logger.debug(f"Response options (PDF): {options}")
 
     # 1. create BytesIO object
     buffer = io.BytesIO()
@@ -58,7 +59,7 @@ def pdf_response(result, **extra_values):
     pdf.add_page()
     pdf.set_font('helvetica', size=12)
     # in this EXAMPLE we also add input parameters
-    print_out = {"input": str(extra_values),
+    print_out = {"input": str(options),
                  "predictions": str(result)
                 }
     pdf.multi_cell(w=0, txt=str(print_out).replace(',',',\n'))

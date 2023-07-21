@@ -35,6 +35,7 @@ def get_metadata():
             "Description": config.MODEL_METADATA.get("Summary"),
             "License": config.MODEL_METADATA.get("License"),
             "Version": config.MODEL_METADATA.get("Version"),
+            "Project-URL": config.MODEL_METADATA.get("Project-URL"),
             "Checkpoints": utils.ls_dirs(config.MODELS_PATH),
         }
         logger.debug("Package model metadata: %s", metadata)

@@ -24,9 +24,6 @@ LABEL version='{{ cookiecutter.app_version }}'
 # What user branch to clone [!]
 ARG branch=master
 
-# If to install JupyterLab
-ARG jlab=true
-
 # Oneclient version, has to match OneData Provider and Linux version
 ARG oneclient_ver=19.02.0.rc2-1~bionic
 
@@ -75,20 +72,13 @@ ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
 # EXPERIMENTAL: install deep-start script
 # N.B.: This repository also contains run_jupyter.sh
 RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
-    ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start && \
-    ln -s /srv/.deep-start/run_jupyter.sh /usr/local/bin/run_jupyter
+    ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start
 
-# Install JupyterLab
-ENV JUPYTER_CONFIG_DIR /srv/.deep-start/
 # Necessary for the Jupyter Lab terminal
 ENV SHELL /bin/bash
-RUN if [ "$jlab" = true ]; then \
-       # by default has to work (1.2.0 wrongly required nodejs and npm)
-       pip3 install --no-cache-dir jupyterlab ; \
-    else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app
-RUN git clone -b $branch {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }} && \
+RUN git clone -b $branch --depth 1 {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }} && \
     cd  {{ cookiecutter.__repo_name }} && \
     pip3 install --no-cache-dir -e . && \
     cd ..
@@ -97,4 +87,4 @@ RUN git clone -b $branch {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_
 EXPOSE 5000 6006 8888
 
 # Launch deepaas
-CMD ["deepaas-run", "--listen-ip", "0.0.0.0", "--listen-port", "5000"]
+CMD ["deep-start","--deepaas"]

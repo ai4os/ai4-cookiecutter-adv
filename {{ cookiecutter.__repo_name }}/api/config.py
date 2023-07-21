@@ -19,8 +19,7 @@ MODEL_NAME = os.getenv("MODEL_NAME", default="{{ cookiecutter.__repo_name }}")
 MODEL_METADATA = _metadata(MODEL_NAME) #.json
 # 'Author' seems to be not correctly extracted, see e.g.
 # https://stackoverflow.com/questions/75249518/right-way-to-publish-authors-on-pypi-from-setuptools/75361691#75361691
-if 'Author' not in MODEL_METADATA.keys():
-    MODEL_METADATA['Author'] = MODEL_METADATA['Author-email'].split()[0]
+# this is why we put "Author" and "Author_email" in setup.py
     
 # LOGGING:
 # logging level accross API modules can be setup via API_LOG_LEVEL, 
