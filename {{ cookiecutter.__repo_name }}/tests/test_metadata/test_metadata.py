@@ -17,37 +17,43 @@ your function defined at `api.get_metadata`.
 
 def test_authors(metadata):
     """Tests that metadata provides authors information."""
-    assert "authors" in metadata
-    assert metadata["authors"] == ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
+    assert "Author" in metadata
+    assert metadata["Author"] == ["{{ cookiecutter.author_name }}"]
+
+
+def test_authors(metadata):
+    """Tests that metadata provides authors information."""
+    assert "Author-email" in metadata
+    assert metadata["Author-email"] == ["{{ cookiecutter.author_email }}"]
 
 
 def test_description(metadata):
     """Tests that metadata provides description information."""
-    assert "description" in metadata
-    assert metadata["description"] == "{{ cookiecutter.description }}"
+    assert "Description" in metadata
+    assert metadata["Description"] == "{{ cookiecutter.description }}"
 
 
 def test_license(metadata):
     """Tests that metadata provides license information."""
-    assert "license" in metadata
-    assert metadata["license"] == "{{ cookiecutter.open_source_license }}"
+    assert "License" in metadata
+    assert metadata["License"] == "{{ cookiecutter.open_source_license }}"
 
 
 def test_version(metadata):
     """Tests that metadata provides version information."""
-    assert "version" in metadata
-    assert isinstance(metadata["version"], str)
-    assert all(v.isnumeric() for v in metadata["version"].split("."))
-    assert len(metadata["version"].split(".")) == 3
+    assert "Version" in metadata
+    assert isinstance(metadata["Version"], str)
+    assert all(v.isnumeric() for v in metadata["Version"].split("."))
+    assert len(metadata["Version"].split(".")) == 3
+
+
+def test_project_url(metadata):
+    """Tests that metadata provides project url information."""
+    assert "Project-URL" in metadata
+    assert metadata["Project-URL"] == "{{ cookiecutter.git_base_url }}"
 
 
 def test_checkpoints(metadata):
     """Tests that metadata provides checkpoints information."""
-    assert "checkpoints" in metadata
-    assert metadata["checkpoints"] == []  # TODO: Add your test checkpoints
-
-
-def test_datasets(metadata):
-    """Tests that metadata provides datasets information."""
-    assert "datasets" in metadata
-    assert metadata["datasets"] == []  # TODO: Add your test checkpoints
+    assert "Checkpoints" in metadata
+    assert metadata["Checkpoints"] == []  # TODO: Add your test checkpoints
