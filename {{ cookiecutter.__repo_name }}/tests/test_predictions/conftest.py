@@ -62,7 +62,7 @@ def input_file(request):
     return UploadedFile("", filename=api.config.DATA_PATH / request.param)
 
 
-@pytest.fixture(scope="module", params=["application/json"])
+@pytest.fixture(scope="module", params=["application/json"])  # Set your cases
 def accept(request):
     """Fixture to provide the accept argument to api.predict."""
     return request.param

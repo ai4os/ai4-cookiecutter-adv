@@ -15,7 +15,7 @@ your function defined at `api.train`.
 # pylint: disable=unused-argument
 
 
-def test_training_acc(training):
+def test_training_acc(training):  # TODO: FIx to your needs
     """Test training result includes accuracy on the return."""
     assert "categorical_accuracy" in training
     assert isinstance(training["categorical_accuracy"], list)
@@ -23,7 +23,7 @@ def test_training_acc(training):
     assert all(0.0 <= x <= 1.0 for x in training["categorical_accuracy"])
 
 
-def test_training_loss(training):
+def test_training_loss(training):  # TODO: FIx to your needs
     """Test training result includes loss on the return."""
     assert "loss" in training
     assert isinstance(training["loss"], list)
@@ -31,7 +31,7 @@ def test_training_loss(training):
     assert all(0.0 <= x for x in training["loss"])
 
 
-def test_training_checkpoint(training):
+def test_training_checkpoint(training):  # TODO: FIx to your needs
     """Test training result provides the new checkpoint name."""
     assert "new_checkpoint" in training
     assert isinstance(training["new_checkpoint"], str)

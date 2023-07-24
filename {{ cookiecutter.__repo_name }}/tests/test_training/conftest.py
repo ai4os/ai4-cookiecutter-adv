@@ -29,10 +29,26 @@ import pytest
 import api
 
 
-@pytest.fixture(scope="module", params=[])  # TODO: Add your checkpoints
-def checkpoint(request):
-    """Fixture to provide the checkpoint argument to api.train."""
-    return api.config.MODELS_PATH / request.param
+@pytest.fixture(scope="module")
+def options(dataset, batch_size, epochs, shuffle, validation_split):
+    """Fixture to return arbitrary keyword arguments for training."""
+    options = {}  # Customize/Complete with training options
+    options["dataset"] = dataset
+    options["batch_size"] = batch_size
+    options["epochs"] = epochs
+    options["shuffle"] = shuffle
+    options["validation_split"] = validation_split
+    return {k: v for k, v in options.items() if v is not None}
+
+
+@pytest.fixture(scope="module")
+def training(options):
+    """Fixture to perform and return training to assert properties."""
+    return api.train(**options)
+
+
+# --- FIXTURES ---------------------------------------------------------------
+# TODO: Add your fixtures here to generate the parameters for the tests
 
 
 @pytest.fixture(scope="module", params=[])  # TODO: Add your datasets
@@ -41,42 +57,25 @@ def dataset(request):
     return api.config.DATA_PATH / request.param
 
 
-@pytest.fixture(scope="module", params=[2])
+@pytest.fixture(scope="module", params=[None])  # TODO: Set your cases
+def batch_size(request):
+    """Fixture to provide the batch_size option to api.train."""
+    return request.param
+
+
+@pytest.fixture(scope="module", params=[2])  # TODO: Set your cases
 def epochs(request):
     """Fixture to provide the epochs option to api.train."""
     return request.param
 
 
-@pytest.fixture(scope="module", params=[None, 1])
-def initial_epoch(request):
-    """Fixture to provide the initial_epoch option to api.train."""
-    return request.param
-
-
-@pytest.fixture(scope="module", params=[None, False])
+@pytest.fixture(scope="module", params=[None, False])  # TODO: Set your cases
 def shuffle(request):
     """Fixture to provide the shuffle option to api.train."""
     return request.param
 
 
-@pytest.fixture(scope="module", params=[None, 0.1])
+@pytest.fixture(scope="module", params=[None, 0.1])  # TODO: Set your cases
 def validation_split(request):
     """Fixture to provide the validation_split option to api.train."""
     return request.param
-
-
-@pytest.fixture(scope="module")
-def options(epochs, initial_epoch, shuffle, validation_split):
-    """Fixture to return arbitrary keyword arguments for training."""
-    options = {}  # Customize/Complete with training options
-    options["epochs"] = epochs
-    options["initial_epoch"] = initial_epoch
-    options["shuffle"] = shuffle
-    options["validation_split"] = validation_split
-    return {k: v for k, v in options.items() if v is not None}
-
-
-@pytest.fixture(scope="module")
-def training(checkpoint, dataset, options):
-    """Fixture to perform and return training to assert properties."""
-    return api.train(checkpoint, dataset, **options)
