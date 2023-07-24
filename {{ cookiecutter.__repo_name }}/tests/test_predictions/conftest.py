@@ -30,6 +30,26 @@ from deepaas.model.v2.wrapper import UploadedFile
 import api
 
 
+@pytest.fixture(scope="module")  # TODO: Add predict args from apy.schemas.py
+def options(checkpoint, input_file, accept):
+    """Fixture to return arbitrary keyword options for predictions."""
+    options = {}  # Customize/Complete with predict options
+    options["checkpoint"] = checkpoint
+    options["input_file"] = input_file
+    options["accept"] = accept
+    return {k: v for k, v in options.items() if v is not None}
+
+
+@pytest.fixture(scope="module")
+def predictions(options):
+    """Fixture to return predictions to assert properties."""
+    return api.predict(**options)
+
+
+# --- FIXTURES ---------------------------------------------------------------
+# TODO: Add your fixtures here to generate the parameters for the tests
+
+
 @pytest.fixture(scope="module", params=[])  # TODO: Add your checkpoints
 def checkpoint(request):
     """Fixture to provide the checkpoint argument to api.predict."""
@@ -46,30 +66,3 @@ def input_file(request):
 def accept(request):
     """Fixture to provide the accept argument to api.predict."""
     return request.param
-
-
-@pytest.fixture(scope="module", params=[None, 20])
-def batch_size(request):
-    """Fixture to provide the batch_size option to api.predict."""
-    return request.param
-
-
-@pytest.fixture(scope="module", params=[None, 2])
-def steps(request):
-    """Fixture to provide the steps option to api.predict."""
-    return request.param
-
-
-@pytest.fixture(scope="module")
-def options(batch_size, steps):
-    """Fixture to return arbitrary keyword options for predictions."""
-    options = {}  # Customize/Complete with predict options
-    options["batch_size"] = batch_size
-    options["steps"] = steps
-    return {k: v for k, v in options.items() if v is not None}
-
-
-@pytest.fixture(scope="module")
-def predictions(checkpoint, input_file, accept, options):
-    """Fixture to return predictions to assert properties."""
-    return api.predict(checkpoint, input_file, accept, **options)

@@ -15,25 +15,25 @@ by your function defined at `api.predict`.
 # pylint: disable=unused-argument
 
 
-def test_predictions_type(predictions):
+def test_predictions_type(predictions):  # TODO: FIx to your needs
     """Tests that predictions is a list type."""
     assert isinstance(predictions, list)
 
 
-def test_predictions_len(predictions):
-    """Tests that predictions have length of 10."""
+def test_predictions_len(predictions):  # TODO: FIx to your needs
+    """Tests that predictions have a specific length."""
     for prediction in predictions[0:10]:
         assert isinstance(prediction, list)
         assert len(prediction) == 10
 
 
-def test_predictions_range(predictions):
+def test_predictions_range(predictions):  # TODO: FIx to your needs
     """Tests that predictions are between 0 and 1."""
-    for prediction in predictions[0:10]:
+    for prediction in predictions:
         assert all(0.0 <= x <= 1.1 for x in prediction)
 
 
-def test_predictions_sum(predictions):
+def test_predictions_sum(predictions):  # TODO: FIx to your needs
     """Tests that sum of ind predictions totals ~1.0."""
-    for prediction in predictions[0:10]:
+    for prediction in predictions:
         assert 0.99 < sum(prediction) < 1.01
