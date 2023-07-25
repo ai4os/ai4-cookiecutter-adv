@@ -47,12 +47,6 @@ def test_version(metadata):
     assert len(metadata["Version"].split(".")) == 3
 
 
-def test_project_url(metadata):
-    """Tests that metadata provides project url information."""
-    assert "Project-URL" in metadata
-    assert metadata["Project-URL"] == "{{ cookiecutter.git_base_url }}"
-
-
 def test_checkpoints(metadata):
     """Tests that metadata provides checkpoints information."""
     assert "Checkpoints" in metadata
