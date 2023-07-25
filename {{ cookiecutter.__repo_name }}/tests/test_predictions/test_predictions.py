@@ -9,20 +9,17 @@ def test_{description for the test}(prediction):
 
 The conftest.py module in the same directory includes the fixture to return
 to your tests inside the argument variable `predictions` the value generated
-by your function defined at `api.predict`.
-
-Here you can find some examples of tests:
+by your function defined at `api.predict`. Here you can find some examples
+of tests:
 
 # Tests that predictions are between 0 and 1.
 def test_predictions_range(predictions):
-    
-    for prediction in predictions:
+    for key, prediction in predictions.items():
         assert all(0.0 <= x <= 1.1 for x in prediction)
 
 # Tests that sum of ind predictions totals ~1.0.
-def test_predictions_sum(predictions):  # TODO: FIx to your needs
-    
-    for prediction in predictions:
+def test_predictions_sum(predictions):
+    for key, prediction in predictions.items():
         assert 0.99 < sum(prediction) < 1.01
 
 """
@@ -30,6 +27,6 @@ def test_predictions_sum(predictions):  # TODO: FIx to your needs
 # pylint: disable=unused-argument
 
 
-def test_predictions_type(predictions):  # TODO: FIx to your needs
+def test_predictions_type(predictions):
     """Tests that predictions is a dict type."""
     assert isinstance(predictions, dict)
