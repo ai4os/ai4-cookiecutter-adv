@@ -15,13 +15,13 @@ your function defined at `api.get_metadata`.
 # pylint: disable=unused-argument
 
 
-def test_authors(metadata):
+def test_author(metadata):
     """Tests that metadata provides authors information."""
     assert "Author" in metadata
     assert metadata["Author"] == ["{{ cookiecutter.author_name }}"]
 
 
-def test_authors(metadata):
+def test_author_email(metadata):
     """Tests that metadata provides authors information."""
     assert "Author-email" in metadata
     assert metadata["Author-email"] == ["{{ cookiecutter.author_email }}"]
