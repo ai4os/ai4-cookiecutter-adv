@@ -5,5 +5,3 @@ pytest-mock
 pytest-env
 flake8
 bandit
-black
-isort

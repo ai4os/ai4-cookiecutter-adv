@@ -1,5 +1,10 @@
 # DEEPaaS framework requirements
 jupyterlab
 tox
-dvc
-dvc-webdav
+black
+isort
+Sphinx
+
+# Optinal tools
+# dvc
+# dvc-webdav

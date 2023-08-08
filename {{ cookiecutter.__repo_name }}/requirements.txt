@@ -3,9 +3,9 @@ deepaas~=2.1.0
 webargs~=5.5.2
 flaat~=1.1.1
 
-# backwards compatibility
-pathlib2
-
 # external requirements
-Sphinx
-fPDF2
+fPDF2~=2.7.5
+
+# Optional tools
+# mlflow~=2.13.0
+
