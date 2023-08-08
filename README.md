@@ -27,9 +27,8 @@ Once you answer all the questions, two directories will be created:
 Each directory is a git repository and has two branches: `master` and `test`.
 This is what the folder structures look like:
 
+## Project structure
 ```
-<your_project>
-##############
 ├── Jenkinsfile             <- Describes basic Jenkins CI/CD pipeline
 ├── LICENSE                 <- License file
 ├── README.md               <- The top-level README for developers using this project.
@@ -97,16 +96,4 @@ DEEP-OC-<your_project>
 
 More extended documentation can be found [here](http://docs.deep-hybrid-datacloud.eu/en/latest/user/overview/cookiecutter-template.html). If you want to look at a minimal app using this template structure check [demo_app](https://github.com/deephdc/DEEP-OC-demo_app) and [DEEP-OC-demo_app](https://github.com/deephdc/DEEP-OC-demo_app).
 
-Running the tests with tox:
-
-```bash
-$ pip install -r requirements-dev.txt
-$ tox
-```
-
-Running the tests with pytest:
-
-```bash
-$ pip install -r requirements-test.txt
-$ python -m pytest --numprocesses=auto --dist=loadscope tests
-```
+Run the cookiecutter tests with `python -m pytest tests`.

@@ -1,34 +1,52 @@
-{{cookiecutter.project_name}}
-==============================
+# {{cookiecutter.project_name}}
 
-[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.__repo_name }}/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.__repo_name }}/job/master)
+[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.**repo_name }}/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.**repo_name }}/job/master)
 
 {{cookiecutter.description}}
 
 To launch it, first install the package then run [deepaas](https://github.com/indigo-dc/DEEPaaS):
+
 ```bash
 git clone {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}
 cd {{ cookiecutter.__repo_name }}
 pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```
+
 The associated Docker container for this module can be found in {{ cookiecutter.git_base_url }}/DEEP-OC-{{ cookiecutter.__repo_name }}.
 
 ## Project structure
+
 ```
-├── Jenkinsfile            <- Describes basic Jenkins CI/CD pipeline
-├── LICENSE                <- License file
-├── README.md              <- The top-level README for developers using this project
-|
-├── data
-│   └── raw                <- The original, immutable data dump.
+├── Jenkinsfile             <- Describes basic Jenkins CI/CD pipeline
+├── LICENSE                 <- License file
+├── README.md               <- The top-level README for developers using this project.
+├── VERSION                 <- Version file indicating the version of the model
+│
+├── {{ cookiecutter.__repo_name }}
+│   ├── README.md           <- Instructions on how to integrate your model with DEEPaaS.
+│   ├── __init__.py         <- Makes <your-model-source> a Python module
+│   ├── ...                 <- Other source code files
+│   └── config.py           <- Module to define CONSTANTS used across the AI-model python package
+│
+├── api                     <- API subpackage for the integration with DEEP API
+│   ├── __init__.py         <- Makes api a Python module, includes API interface methods
+│   ├── config.py           <- API module for loading configuration from environment
+│   ├── responses.py        <- API module with parsers for method responses
+│   ├── schemas.py          <- API module with definition of method arguments
+│   └── utils.py            <- API module with utility functions
+│
+├── data                    <- Data subpackage for the integration with DEEP API
+│   ├── external            <- Data from third party sources.
+│   ├── processed           <- The final, canonical data sets for modeling.
+│   └── raw                 <- The original, immutable data dump.
 │
 ├── docs                   <- A default Sphinx project; see sphinx-doc.org for details
 │
-├── models                 <- Trained and serialized models, model predictions, or model summaries
+├── models                 <- Folder to store your models
 │
 ├── notebooks              <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                             the creator's initials (if many user development), 
+│                             the creator's initials (if many user development),
 │                             and a short `_` delimited description, e.g.
 │                             `1.0-jqp-initial_data_exploration.ipynb`.
 │
@@ -36,37 +54,50 @@ The associated Docker container for this module can be found in {{ cookiecutter.
 │
 ├── reports                <- Generated analysis as HTML, PDF, LaTeX, etc.
 │   └── figures            <- Generated graphics and figures to be used in reporting
-|
-├── tests                  <- Scripts to perfrom code testing
 │
-├── requirements.txt       <- The requirements file for reproducing the analysis environment, e.g.
-│                             generated with `pip freeze > requirements.txt`
-├── requirements-test.txt  <- The requirements file for the test environment
+├── requirements-dev.txt    <- Requirements file to install development tools
+├── requirements-test.txt   <- Requirements file to install testing tools
+├── requirements.txt        <- Requirements file to run the API and models
 │
-├── pyproject.toml         <- defines build system requirements of Python projects (e.g. pip install -e .)
-|
-├── {{cookiecutter.__repo_name}}    <- Source code for use in this project.
-│   ├── __init__.py        <- Makes {{cookiecutter.__repo_name}} a Python (sub)package
-│   │
-│   ├── dataset            <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── models             <- Scripts to train models and make predictions
-│   │
-│   ├── visualization      <- Scripts to create exploratory and results oriented visualizations
-│   |   └── visualize.py
-|   |
-|   ├── config.py          <- Module to define CONSTANTS used across the AI-model python package
-|   ├── predict.py         <- Module to describe inference pipeline
-|   └── train.py           <- Module to describe training pipeline
+├── pyproject.toml         <- Makes project pip installable (pip install -e .)
 │
-├── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
-|
-└── VERSION                <- file to define software version
-
+├── tests                   <- Scripts to perform code testing
+│   ├── configurations      <- Folder to store the configuration files for DEEPaaS server
+│   ├── conftest.py         <- Pytest configuration file (Not to be modified in principle)
+│   ├── data                <- Folder to store the data for testing
+│   ├── models              <- Folder to store the models for testing
+│   ├── test_deepaas.py     <- Test file for DEEPaaS API server requirements (Start, etc.)
+│   ├── test_metadata       <- Tests folder for model metadata requirements
+│   ├── test_predictions    <- Tests folder for model predictions requirements
+│   └── test_training       <- Tests folder for model training requirements
+│
+└── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
 ```
 
+## Integrating your model with DEEPaaS
 
+After executing the cookiecutter template, you will have a folder structure
+ready to be integrated with DEEPaaS. The you can decide between starting the
+project from scratch or integrating your existing model with DEEPaaS.
+
+The folder `{{ cookiecutter.__repo_name }}` is designed to contain the source
+code of your model. You can add your model files there or replace it by another
+repository by using [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+The only requirement is that the folder `{{ cookiecutter.__repo_name }}` contains
+an `__init__.py` file conserving the already defined methods. You can edit the
+template functions already defined inside or import your own functions from
+another file. See the [README.md](./{{ cookiecutter.__repo_name }}/README.md)
+in the `{{ cookiecutter.__repo_name }}` folder for more information.
+
+Those methods, are used by the subpackage `api` to define the API interface.
+See the project structure section for more information about the `api` folder.
+You are allowed to customize your model API and CLI arguments and responses by
+editing `api.schemas` and`api.responses` modules. See documentation inside those
+files for more information.
+
+## Documentation
+
+TODO: Add instructions on how to build documentation
 
 ## Testing
 
@@ -79,20 +110,32 @@ virtual environment.
 
 Tests are implemented following [pytest](https://docs.pytest.org) framework.
 Fixtures and parametrization are placed inside `conftest.py` files meanwhile
-assertion tests are located on `test_*.py` files.
+assertion tests are located on `test_*.py` files. As developer, you can edit
+any of the existing files or add new ones as needed. However, the project is
+designed so you only have to edit the files inside:
 
-The folder `tests/datasets` should contain minimalistic but representative
+    - tests/data: To add your testing data (small datasets, etc.).
+    - tests/models: To add your testing models (small models, etc.).
+    - tests/test_metadata: To fix and test your metadata requirements.
+    - tests/test_predictions: To fix and test your predictions requirements.
+    - tests/test_training: To fix and test your training requirements.
+
+The folder `tests/data` should contain minimalistic but representative
 datasets to be used for testing. In a similar way, `tests/models` should
-contain simple models for testing that can fit on your code repository.
+contain simple models for testing that can fit on your code repository. This
+is important to avoid large files on your repository and to speed up the
+testing process.
 
-After adding your dataset and models to the corresponding testing folders,
-you should configure the corresponding fixtures on `tests/test_*/conftest.py`
-with the names of your files. Additionally you can configure, add and
-remove fixtures with required or optional parameters as needed by your
-functions defined at the `api.__init__.py` module.
+Running the tests with tox:
 
-In case you do not have any checkpoint or model to test, you can use the
-script `checkpoints_example.py` to generate a dummy model checkpoint that
-can be used for testing purposes. The scripts consumes a file `train-dataset.npz`
-from _DATA_PATH_ environment variable (default: `./data`) and generates a
-checkpoint with the system timestamp at _MODELS_PATH_.
+```bash
+$ pip install -r requirements-dev.txt
+$ tox
+```
+
+Running the tests with pytest:
+
+```bash
+$ pip install -r requirements-test.txt
+$ python -m pytest --numprocesses=auto --dist=loadscope tests
+```
