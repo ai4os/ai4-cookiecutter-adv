@@ -1,7 +1,8 @@
-import pytest
 from pathlib import Path
-from cookiecutter import main, exceptions
 
+import pytest
+from cookiecutter.exceptions import FailedHookException
+from cookiecutter.main import cookiecutter
 
 CONFIGURATIONS_PATH = Path(__file__).parents[0] / "configurations"
 CONFIGURATIONS = set(["no-config"])
@@ -9,8 +10,8 @@ CONFIGURATIONS = set(["no-config"])
 
 @pytest.mark.parametrize("config_file", CONFIGURATIONS, indirect=True)
 def test_pre_gen_fails(cookiecutter_path, config_args):
-    with pytest.raises(exceptions.FailedHookException) as excinfo:
-        main.cookiecutter(
+    with pytest.raises(FailedHookException) as excinfo:
+        cookiecutter(
             template=str(cookiecutter_path),
             no_input=True,
             extra_context=config_args,

@@ -2,33 +2,34 @@ import pytest
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_git_base_url(project, git_base_url):
-    raise NotImplementedError  # TODO: implement your test here
+def test_git_base_url(pyproject, git_base_url, repo_name):
+    urls = pyproject["project"]["urls"]
+    assert urls["Homepage"] == f"{git_base_url}/{repo_name}"
+    assert urls["Bug Tracker"] == f"{git_base_url}/{repo_name}/issues"
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_project_name(project, project_name):
-    raise NotImplementedError  # TODO: implement your test here
+def test_project_name(pyproject, repo_name):
+    assert pyproject["project"]["name"] == repo_name
+
+
+@pytest.mark.parametrize("config_file", ["config-1"], indirect=True)
+def test_pyproject_authors(pyproject):
+    assert pyproject["project"]["authors"] == [
+        {"name": "VK", "email": "v.k@example.com"},
+        {"name": "BE", "email": "b.e@example.com"},
+    ]
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_author_name(project, author_name):
-    raise NotImplementedError  # TODO: implement your test here
-
-
-@pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_author_email(project, author_email):
-    raise NotImplementedError  # TODO: implement your test here
-
-
-@pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_description(project, description):
-    raise NotImplementedError  # TODO: implement your test here
+def test_description(pyproject, description):
+    assert pyproject["project"]["description"] == description
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
 def test_app_version(project, app_version):
-    raise NotImplementedError  # TODO: implement your test here
+    with open(project / "VERSION", "r", encoding="utf-8") as file:
+        assert file.read().rstrip() == app_version
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)

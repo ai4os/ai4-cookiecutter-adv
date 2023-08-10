@@ -5,8 +5,9 @@ import tempfile
 from pathlib import Path
 
 import pytest
+import toml
 import yaml
-from cookiecutter import main
+from cookiecutter.main import cookiecutter
 
 
 @pytest.fixture(scope="session")
@@ -39,7 +40,7 @@ def create_testdir(config_file):
 @pytest.fixture(scope="session", name="project")
 def bake_project(cookiecutter_path, testdir, config_args, project_name):
     """Fixture to bake a project from a cookiecutter template."""
-    main.cookiecutter(
+    cookiecutter(
         template=str(cookiecutter_path),
         no_input=True,
         extra_context=config_args,
@@ -47,6 +48,13 @@ def bake_project(cookiecutter_path, testdir, config_args, project_name):
     )
     project_dir = project_name.lower().replace(" ", "_").replace("-", "_")
     return Path(testdir) / "project" / project_dir
+
+
+@pytest.fixture(scope="session")
+def pyproject(project):
+    """Fixture to provide parsed pyproject.toml."""
+    with open(project / "pyproject.toml", encoding="utf-8") as file:
+        return toml.load(file)
 
 
 @pytest.fixture(scope="session")
@@ -59,6 +67,12 @@ def git_base_url(config_args):
 def project_name(config_args):
     """Fixture to provide project_name."""
     return config_args.get("project_name", None)
+
+
+@pytest.fixture(scope="session")
+def repo_name(project_name):
+    """Fixture to provide repo_name."""
+    return project_name.lower().replace(" ", "_").replace("-", "_")
 
 
 @pytest.fixture(scope="session")
