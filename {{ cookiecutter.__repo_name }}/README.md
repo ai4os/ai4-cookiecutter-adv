@@ -95,6 +95,14 @@ You are allowed to customize your model API and CLI arguments and responses by
 editing `api.schemas` and`api.responses` modules. See documentation inside those
 files for more information.
 
+Sometimes you only need to add an interface to an existing model. In case that
+the model is already published in a public repository, you can add it as a
+requirement into the `requirements.txt` file. If the model is not published
+yet, you can add it as a submodule inside or outside the project and install
+it by using `pip install -e <path-to-model>`. In both cases, you will need to
+interface the model with the `api` subpackage with the required methods. See
+the [README.md](./{{ cookiecutter.__repo_name }}/README.md)
+
 ## Documentation
 
 TODO: Add instructions on how to build documentation
