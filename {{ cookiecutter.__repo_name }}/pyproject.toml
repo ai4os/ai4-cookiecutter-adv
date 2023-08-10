@@ -4,8 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "{{ cookiecutter.__repo_name }}"
+authors = [
+{%- set names = cookiecutter.author_name.split(',') -%}
+{%- set emails = cookiecutter.author_email.split(',') -%}
+{%- set my_tuples = [] -%}
+{%- for i in range(0, names|length) %}
+    { name = "{{ names[i].strip() }}", email = "{{ emails[i].strip() }}" },
+{%- endfor %}
+]
 description = "{{ cookiecutter.description }}"
-# !! Authors and Authors_emails are taken from setup.py. Otherwise wrongly rendered !!
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "{{ cookiecutter.open_source_license }}" }
