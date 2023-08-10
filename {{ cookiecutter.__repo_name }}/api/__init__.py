@@ -12,7 +12,7 @@ from aiohttp.web import HTTPException
 
 import {{ cookiecutter.__repo_name }} as aimodel
 
-from . import config, responses, schemas, utils
+from {{ cookiecutter.__repo_name }}.api import config, responses, schemas, utils
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)

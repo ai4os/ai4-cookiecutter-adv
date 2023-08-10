@@ -11,7 +11,7 @@ import logging
 import numpy as np
 from fpdf import FPDF
 
-from . import config
+from {{ cookiecutter.__repo_name }}.api import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)
