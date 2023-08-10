@@ -6,9 +6,7 @@
 # Please, see the LICENSE file
 # pylint: disable=missing-docstring,invalid-name
 import re
-
-from email_validator import EmailNotValidError, validate_email
-from pydantic import HttpUrl
+from urllib.parse import urlparse
 
 MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -18,21 +16,18 @@ error = False
 
 # Validate git_base_url
 git_base_url = "{{ cookiecutter.git_base_url}}"
-try:
-    HttpUrl(git_base_url)
-except ValueError as err:
+git_base_url = urlparse(url=git_base_url)
+if not bool(git_base_url.scheme and git_base_url.netloc):
     print("[ERROR]:", f"Invalid git_base_url {git_base_url}")
     error = True
 
 
 # Validate author_emails
 author_emails = "{{ cookiecutter.author_email}}".split(",")
-try:
-    for email in author_emails:
-        validate_email(email.strip(), check_deliverability=False)
-except EmailNotValidError as err:
-    print("[ERROR]:", f"Invalid author_email {email}")
-    error = True
+for email in author_emails:
+    if not re.match(EMAIL_REGEX, email.strip()):
+        print("[ERROR]:", f"Invalid author_email {email}")
+        error = True
 
 
 # Validate length of author_emails
