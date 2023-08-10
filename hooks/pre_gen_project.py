@@ -4,50 +4,62 @@
 # Copyright (c) 2018 - 2023 Karlsruhe Institute of Technology - Steinbuch Centre for Computing
 # This code is distributed under the MIT License
 # Please, see the LICENSE file
-
-"""
-    Pre-hook script
-    1. Check that {{ cookiecutter.git_base_url}} is a valid URL
-    2. Check that {{ cookiecutter.__repo_name }}:
-      a. is not too short (has to be more than one character)
-      b. has characters valid for python
-"""
-
+# pylint: disable=missing-docstring,invalid-name
 import re
-import sys
-from urllib.parse import urlparse
 
-# init error_messages
+from email_validator import EmailNotValidError, validate_email
+from pydantic import HttpUrl
+
+MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
+EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+APP_VERSION_REGEX = r"^\d+\.\d+\.\d+$"
 error = False
-error_messages = []
 
-# check {{ cookiecutter.git_base_url}}
-def check_url(url):
-    """Function to check URL"""
-    try:
-        result = urlparse(url)
-        return all([result.scheme, result.netloc])
-    except:
-        return False
 
-git_base_url = '{{ cookiecutter.git_base_url}}'
-if (not check_url(git_base_url)):
-    message = ("'{}' is not a valid URL! ".format(git_base_url) +
-               "Please, check the 'git_base_url' input")
-    print("[ERROR]: " + message)
+# Validate git_base_url
+git_base_url = "{{ cookiecutter.git_base_url}}"
+try:
+    HttpUrl(git_base_url)
+except ValueError as err:
+    print("[ERROR]:", f"Invalid git_base_url {git_base_url}")
     error = True
-    error_messages.append(message)
 
-# check {{ cookiecutter.__repo_name }}
-MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'
-repo_name = '{{ cookiecutter.__repo_name }}'
-if (not re.match(MODULE_REGEX, repo_name) or
-    len(repo_name) < 2):
-    message = ("'{}' is not a valid Python module name! ".format(repo_name) +
-               "Please, check the 'project_name' input")
-    print("[ERROR]: " + message)
+
+# Validate author_emails
+author_emails = "{{ cookiecutter.author_email}}".split(",")
+try:
+    for email in author_emails:
+        validate_email(email.strip(), check_deliverability=False)
+except EmailNotValidError as err:
+    print("[ERROR]:", f"Invalid author_email {email}")
     error = True
-    error_messages.append(message)
 
+
+# Validate length of author_emails
+author_names = "{{ cookiecutter.author_name}}".split(",")
+n_authors, n_emails = len(author_names), len(author_emails)
+if n_emails != n_authors:
+    error_msg = "Authors ({}) not matching number of emails ({})"
+    print("[ERROR]:", error_msg.format(n_authors, n_emails))
+    error = True
+
+
+# Validate app_version
+app_version = "{{ cookiecutter.app_version}}"
+if not re.match(APP_VERSION_REGEX, app_version):
+    print("[ERROR]:", f"Invalid app_version {app_version}")
+    error = True
+
+
+# Validate repo_name
+project_name = "{{ cookiecutter.project_name}}"
+repo_name = "{{ cookiecutter.__repo_name}}"
+if not re.match(MODULE_REGEX, repo_name) or len(repo_name) < 2:
+    error_msg = "Invalid project name ({}), parsed as: ({})"
+    print("[ERROR]:", error_msg.format(project_name, repo_name))
+    error = True
+
+
+# If any of the validation checks failed, exit with error
 if error:
-    sys.exit("; ".join(error_messages))
+    raise SystemExit(1)
