@@ -66,7 +66,7 @@ class PredArgsSchema(marshmallow.Schema):
             "location": "headers",
         },
         required=True,
-        validate=validate.OneOf(responses.content_types),
+        validate=validate.OneOf(list(responses.content_types)),
     )
 
 
@@ -109,5 +109,5 @@ class TrainArgsSchema(marshmallow.Schema):
             "location": "headers",
         },
         required=True,
-        validate=validate.OneOf(responses.content_types),
+        validate=validate.OneOf(list(responses.content_types)),
     )
