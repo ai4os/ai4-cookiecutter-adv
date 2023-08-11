@@ -61,12 +61,6 @@ def epochs(request):
     return request.param
 
 
-@pytest.fixture(scope="module", params=["application/json"])
-def accept(request):
-    """Fixture to provide the accept argument to api.predict."""
-    return request.param
-
-
 # Example of fixture for shuffle parametrization
 # @pytest.fixture(scope="module", params=[None, False])
 # def shuffle(request):

@@ -20,7 +20,7 @@ logger.setLevel(config.LOG_LEVEL)
 # EXAMPLE of json_response parser function
 # = HAVE TO MODIFY FOR YOUR NEEDS =
 def json_response(result, **options):
-    """Converts the prediction or training results into json return format.
+    """Converts the prediction results into json return format.
 
     Arguments:
         result -- Result value from call, expected either dict or str
@@ -50,7 +50,7 @@ def json_response(result, **options):
 # EXAMPLE of pdf_response parser function
 # = HAVE TO MODIFY FOR YOUR NEEDS =
 def pdf_response(result, **options):
-    """Converts the prediction or training results into pdf return format.
+    """Converts the prediction results into pdf return format.
 
     Arguments:
         result -- Result value from call, expected either dict or str

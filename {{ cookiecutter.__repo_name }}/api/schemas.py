@@ -102,12 +102,3 @@ class TrainArgsSchema(marshmallow.Schema):
         load_default=1,
         validate=validate.Range(min=1),
     )
-
-    accept = fields.String(
-        metadata={
-            "description": "Return format for method response.",
-            "location": "headers",
-        },
-        required=True,
-        validate=validate.OneOf(list(responses.content_types)),
-    )
