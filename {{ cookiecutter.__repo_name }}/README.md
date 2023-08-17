@@ -6,6 +6,8 @@
 
 To launch it, first install the package then run [deepaas](https://github.com/indigo-dc/DEEPaaS):
 
+> ![warning](https://img.shields.io/badge/Warning-red.svg) **Warning**: If you are using a virtual environment, make sure you are working with the last version of pip before installing the package. Use `pip install --upgrade pip` to upgrade pip.
+
 ```bash
 git clone {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}
 cd {{ cookiecutter.__repo_name }}
