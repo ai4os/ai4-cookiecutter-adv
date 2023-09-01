@@ -29,7 +29,10 @@ dynamic = ["version", "dependencies"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-env = ["DATA_PATH=tests/datasets", "MODELS_PATH=tests/models"]
+env = ["DATA_PATH=tests/data", "MODELS_PATH=tests/models"]
+# Allow test files to share names
+# https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
+addopts = "--import-mode=importlib"
 
 [tool.setuptools]
 packages = ["{{ cookiecutter.__repo_name }}", "{{ cookiecutter.__repo_name }}.api"]
