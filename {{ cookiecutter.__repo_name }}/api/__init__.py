@@ -104,7 +104,7 @@ def train(model_name, input_file, **options):
         logger.info("Using model %s for training", model_name)
         logger.debug("Loading data from input_file: %s", input_file)
         logger.debug("Training with options: %s", options)
-        result = aimodel.training(model_name, input_file, **options)
+        result = aimodel.train(model_name, input_file, **options)
         logger.debug("Training result: %s", result)
         return result
     except Exception as err:
