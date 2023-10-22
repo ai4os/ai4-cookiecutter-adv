@@ -67,6 +67,8 @@ def copy_remote(frompath, topath, timeout=600):
     ) as process:
         try:
             outs, errs = process.communicate(None, timeout)
+            if errs:
+                raise RuntimeError(errs)
         except TimeoutExpired:
             logger.error("Timeout when copying from/to remote directory.")
             process.kill()
