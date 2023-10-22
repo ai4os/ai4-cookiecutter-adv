@@ -18,7 +18,7 @@ class ModelName(fields.String):
     """
 
     def _deserialize(self, value, attr, data, **kwargs):
-        if value not in utils.ls_dir(config.MODELS_PATH):
+        if value not in utils.ls_dirs(config.MODELS_PATH):
             raise ValidationError(f"Checkpoint `{value}` not found.")
         return str(config.MODELS_PATH / value)
 
@@ -29,7 +29,7 @@ class Dataset(fields.String):
     """
 
     def _deserialize(self, value, attr, data, **kwargs):
-        if value not in utils.ls_dir(config.DATA_PATH / "processed"):
+        if value not in utils.ls_dirs(config.DATA_PATH / "processed"):
             raise ValidationError(f"Dataset `{value}` not found.")
         return str(config.DATA_PATH / "processed" / value)
 
@@ -87,7 +87,7 @@ class TrainArgsSchema(marshmallow.Schema):
         required=True,
     )
 
-    dataset = fields.String(
+    dataset = Dataset(
         metadata={
             "description": "Path to the training dataset.",
         },
