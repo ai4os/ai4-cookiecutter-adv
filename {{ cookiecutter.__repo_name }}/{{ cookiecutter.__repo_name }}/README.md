@@ -85,6 +85,6 @@ Then you can execute the scripts from the command line including the folder:
 
 ```bash
 $ python -m {{ cookiecutter.__repo_name }}.dataset.make_dataset {your_arguments}
-$ python -m {{ cookiecutter.__repo_name }}.models..make_model {your_arguments}
+$ python -m {{ cookiecutter.__repo_name }}.models.make_model {your_arguments}
 $ python -m {{ cookiecutter.__repo_name }}.visualization.compare_models {your_arguments}
 ```

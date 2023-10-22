@@ -1,6 +1,6 @@
 """Package to create datasets, pipelines and other utilities.
 
-You can use this module for example, to white all the functions needed to
+You can use this module for example, to write all the functions needed to
 operate the methods defined at `__init__.py` or in your scripts.
 
 All functions here are optional and you can add or remove them as you need.
