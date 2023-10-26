@@ -41,6 +41,7 @@ def get_metadata():
         logger.debug("Package model metadata: %s", metadata)
         return metadata
     except Exception as err:
+        logger.error("Error collecting metadata: %s", err, exc_info=True)
         raise HTTPException(reason=err) from err
 
 
@@ -54,6 +55,7 @@ def warm():
         logger.info("Warming up the model.api...")
         aimodel.warm()
     except Exception as err:
+        logger.error("Error while training: %s", err, exc_info=True)
         raise RuntimeError(reason=err) from err
 
 
@@ -82,6 +84,7 @@ def predict(model_name, input_file, accept='application/json', **options):
         logger.info("Returning content_type for: %s", accept)
         return responses.content_types[accept](result, **options)
     except Exception as err:
+        logger.error("Error while doing predictions: %s", err, exc_info=True)
         raise HTTPException(reason=err) from err
 
 
@@ -108,6 +111,6 @@ def train(model_name, input_file, **options):
         logger.debug("Training result: %s", result)
         return result
     except Exception as err:
-        logger.info("Error while training: %s", err)
+        logger.error("Error while training: %s", err, exc_info=True)
         raise  # Reraise the exception after log
 
