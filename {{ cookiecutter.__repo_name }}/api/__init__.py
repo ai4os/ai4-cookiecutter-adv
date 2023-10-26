@@ -108,4 +108,6 @@ def train(model_name, input_file, **options):
         logger.debug("Training result: %s", result)
         return result
     except Exception as err:
-        raise HTTPException(reason=err) from err
+        logger.info("Error while training: %s", err)
+        raise  # Reraise the exception after log
+
