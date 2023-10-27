@@ -55,7 +55,7 @@ def warm():
         logger.info("Warming up the model.api...")
         aimodel.warm()
     except Exception as err:
-        logger.error("Error while training: %s", err, exc_info=True)
+        logger.error("Error when warming up: %s", err, exc_info=True)
         raise RuntimeError(reason=err) from err
 
 
