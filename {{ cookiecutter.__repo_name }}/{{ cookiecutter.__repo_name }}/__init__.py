@@ -12,10 +12,10 @@ from your_module import your_function as training
 # TODO: add your imports here
 import logging
 from pathlib import Path
-import {{ cookiecutter.__repo_name }}.config as cfg
+import {{ cookiecutter.__repo_name }} import config
 
 logger = logging.getLogger(__name__)
-logger.setLevel(cfg.LOG_LEVEL)
+logger.setLevel(config.LOG_LEVEL)
 
 
 # TODO: warm (Start Up)
