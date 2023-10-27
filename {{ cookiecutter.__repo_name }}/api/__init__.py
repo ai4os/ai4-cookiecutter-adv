@@ -30,11 +30,11 @@ def get_metadata():
     try:  # Call your AI model metadata() method
         logger.info("Collecting metadata from: %s", config.API_NAME)
         metadata = {
-            "author": config.MODEL_METADATA.get("authors"),
-            "author-email": config.MODEL_METADATA.get("author-emails"),
-            "description": config.MODEL_METADATA.get("summary"),
-            "license": config.MODEL_METADATA.get("license"),
-            "version": config.MODEL_METADATA.get("version"),
+            "author": config.API_METADATA.get("authors"),
+            "author-email": config.API_METADATA.get("author-emails"),
+            "description": config.API_METADATA.get("summary"),
+            "license": config.API_METADATA.get("license"),
+            "version": config.API_METADATA.get("version"),
             "datasets": utils.ls_dirs(config.DATA_PATH / "processed"),
             "models": utils.ls_dirs(config.MODELS_PATH),
         }
