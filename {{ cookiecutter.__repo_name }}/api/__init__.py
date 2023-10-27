@@ -84,7 +84,7 @@ def predict(model_name, input_file, accept='application/json', **options):
         logger.info("Returning content_type for: %s", accept)
         return responses.content_types[accept](result, **options)
     except Exception as err:
-        logger.error("Error while doing predictions: %s", err, exc_info=True)
+        logger.error("Error calculating predictions: %s", err, exc_info=True)
         raise HTTPException(reason=err) from err
 
 
