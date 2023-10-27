@@ -7,8 +7,6 @@ file on your model package to define CONSTANTS related to your model.
 
 By convention, the CONSTANTS defined in this module are in UPPER_CASE.
 """
-# Do NOT import anything from `api` or `{{ cookiecutter.__repo_name }}` packages here.
-# That might create circular dependencies.
 import os
 import logging
 from importlib import metadata
