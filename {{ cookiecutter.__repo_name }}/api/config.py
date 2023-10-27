@@ -13,11 +13,9 @@ from importlib import metadata
 from pathlib import Path
 
 
-# Default AI model
-MODEL_NAME = os.getenv("MODEL_NAME", default="{{ cookiecutter.__repo_name }}")
-
 # Get AI model metadata
-MODEL_METADATA = metadata.metadata(MODEL_NAME)  # .json
+API_NAME = os.getenv("API_NAME", default="{{ cookiecutter.__repo_name }}")
+MODEL_METADATA = metadata.metadata(API_NAME)  # .json
 
 # Fix metadata for emails from pyproject parsing
 _EMAILS = MODEL_METADATA["Author-email"].split(", ")

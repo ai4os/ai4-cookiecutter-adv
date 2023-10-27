@@ -28,7 +28,7 @@ def get_metadata():
         A dictionary containing metadata information required by DEEPaaS.
     """
     try:  # Call your AI model metadata() method
-        logger.info("Collecting metadata from: %s", config.MODEL_NAME)
+        logger.info("Collecting metadata from: %s", config.API_NAME)
         metadata = {
             "author": config.MODEL_METADATA.get("authors"),
             "author-email": config.MODEL_METADATA.get("author-emails"),
