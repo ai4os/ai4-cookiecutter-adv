@@ -15,12 +15,11 @@ pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```
 
-The associated Docker container for this module can be found in {{ cookiecutter.git_base_url }}/DEEP-OC-{{ cookiecutter.__repo_name }}.
-
 ## Project structure
 
 ```
 ├── Jenkinsfile             <- Describes basic Jenkins CI/CD pipeline
+├── Dockerfile              <- Steps to build a DEEPaaS API Docker image
 ├── LICENSE                 <- License file
 ├── README.md               <- The top-level README for developers using this project.
 ├── VERSION                 <- Version file indicating the version of the model

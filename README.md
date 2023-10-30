@@ -19,17 +19,14 @@ pip install cookiecutter
 cookiecutter https://github.com/deephdc/cookiecutter-deep.git --checkout advanced
 ```
 
-Once you answer all the questions, two directories will be created:
-
-- `DEEP-OC-<your_project>`: this is where the Docker container code goes
-- `<your_project>`: this is where your module's code goes
-
-Each directory is a git repository and has two branches: `master` and `test`.
+Once you answer all the questions, the project directory will be created as a
+git repository with two branches: `master` and `test`.
 This is what the folder structures look like:
 
 ## Project structure
 ```
 ├── Jenkinsfile             <- Describes basic Jenkins CI/CD pipeline
+├── Dockerfile              <- Steps to build a DEEPaaS API Docker image
 ├── LICENSE                 <- License file
 ├── README.md               <- The top-level README for developers using this project.
 ├── VERSION                 <- Version file indicating the version of the model
@@ -83,17 +80,9 @@ This is what the folder structures look like:
 │   └── test_training       <- Tests folder for model training requirements
 │
 └── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
-
-DEEP-OC-<your_project>
-######################
-├── Dockerfile             Describes main steps on integrations DEEPaaS API and <your_project> application in one Docker image
-├── Jenkinsfile            Describes basic Jenkins CI/CD pipeline
-├── LICENSE                License file
-├── README.md              README for developers and users.
-├── docker-compose.yml     Allows running the application with various configurations via docker-compose
-└── metadata.json          Defines information propagated to the [DEEP Open Catalog](https://marketplace.deep-hybrid-datacloud.eu)
 ```
 
-More extended documentation can be found [here](http://docs.deep-hybrid-datacloud.eu/en/latest/user/overview/cookiecutter-template.html). If you want to look at a minimal app using this template structure check [demo_app](https://github.com/deephdc/DEEP-OC-demo_app) and [DEEP-OC-demo_app](https://github.com/deephdc/DEEP-OC-demo_app).
+More extended documentation can be found [here](http://docs.deep-hybrid-datacloud.eu/en/latest/user/overview/cookiecutter-template.html).
+If you want to look at a minimal app using this template structure check [demo_app](https://github.com/deephdc/demo_app).
 
 Run the cookiecutter tests with `python -m pytest tests`.
