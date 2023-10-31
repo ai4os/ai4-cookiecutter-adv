@@ -20,9 +20,6 @@ def test_api_folder(project):
 @pytest.mark.parametrize("config_file", ["config-1"], indirect=True)
 def test_data_folder(project):
     assert os.path.exists(project / "data")
-    assert os.path.exists(project / "data" / "external")
-    assert os.path.exists(project / "data" / "processed")
-    assert os.path.exists(project / "data" / "raw")
 
 
 @pytest.mark.parametrize("config_file", ["config-1"], indirect=True)

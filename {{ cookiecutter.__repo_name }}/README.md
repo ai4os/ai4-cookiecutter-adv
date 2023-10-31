@@ -38,29 +38,26 @@ deepaas-run --listen-ip 0.0.0.0
 │   └── utils.py            <- API module with utility functions
 │
 ├── data                    <- Data subpackage for the integration with DEEP API
-│   ├── external            <- Data from third party sources.
-│   ├── processed           <- The final, canonical data sets for modeling.
-│   └── raw                 <- The original, immutable data dump.
 │
-├── docs                   <- A default Sphinx project; see sphinx-doc.org for details
+├── docs                    <- A default Sphinx project; see sphinx-doc.org for details
 │
-├── models                 <- Folder to store your models
+├── models                  <- Folder to store your models
 │
-├── notebooks              <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                             the creator's initials (if many user development),
-│                             and a short `_` delimited description, e.g.
-│                             `1.0-jqp-initial_data_exploration.ipynb`.
+├── notebooks               <- Jupyter notebooks. Naming convention is a number (for ordering),
+│                              the creator's initials (if many user development),
+│                              and a short `_` delimited description, e.g.
+│                              `1.0-jqp-initial_data_exploration.ipynb`.
 │
-├── references             <- Data dictionaries, manuals, and all other explanatory materials.
+├── references              <- Data dictionaries, manuals, and all other explanatory materials.
 │
-├── reports                <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures            <- Generated graphics and figures to be used in reporting
+├── reports                 <- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures             <- Generated graphics and figures to be used in reporting
 │
 ├── requirements-dev.txt    <- Requirements file to install development tools
 ├── requirements-test.txt   <- Requirements file to install testing tools
 ├── requirements.txt        <- Requirements file to run the API and models
 │
-├── pyproject.toml         <- Makes project pip installable (pip install -e .)
+├── pyproject.toml          <- Makes project pip installable (pip install -e .)
 │
 ├── tests                   <- Scripts to perform code testing
 │   ├── configurations      <- Folder to store the configuration files for DEEPaaS server
@@ -72,7 +69,7 @@ deepaas-run --listen-ip 0.0.0.0
 │   ├── test_predictions    <- Tests folder for model predictions requirements
 │   └── test_training       <- Tests folder for model training requirements
 │
-└── tox.ini                <- tox file with settings for running tox; see tox.testrun.org
+└── tox.ini                 <- tox file with settings for running tox; see tox.testrun.org
 ```
 
 ## Integrating your model with DEEPaaS

@@ -47,7 +47,7 @@ import api
 @pytest.fixture(scope="module", params=["t100-images.npy"])
 def input_file(request):
     """Fixture to provide the input_file argument to api.predict."""
-    filepath = f"{api.config.DATA_PATH}/external"
+    filepath = f"{api.config.DATA_PATH}"
     return UploadedFile("", filename=f"{filepath}/{request.param}")
 
 
