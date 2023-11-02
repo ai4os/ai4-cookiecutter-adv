@@ -1,6 +1,6 @@
-# {{cookiecutter.project_name}}
+# {{cookiecutter.package_slug}}
 
-[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.__repo_name }}/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.__repo_name }}/job/master)
+[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.package_slug }}/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.package_slug }}/job/master)
 
 {{cookiecutter.description}}
 
@@ -9,8 +9,8 @@ To launch it, first install the package then run [deepaas](https://github.com/in
 > ![warning](https://img.shields.io/badge/Warning-red.svg) **Warning**: If you are using a virtual environment, make sure you are working with the last version of pip before installing the package. Use `pip install --upgrade pip` to upgrade pip.
 
 ```bash
-git clone {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}
-cd {{ cookiecutter.__repo_name }}
+git clone {{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}
+cd {{ cookiecutter.package_slug }}
 pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```
@@ -24,7 +24,7 @@ deepaas-run --listen-ip 0.0.0.0
 ├── README.md               <- The top-level README for developers using this project.
 ├── VERSION                 <- Version file indicating the version of the model
 │
-├── {{ cookiecutter.__repo_name }}
+├── {{ cookiecutter.__model_source }}
 │   ├── README.md           <- Instructions on how to integrate your model with DEEPaaS.
 │   ├── __init__.py         <- Makes <your-model-source> a Python module
 │   ├── ...                 <- Other source code files
@@ -78,14 +78,14 @@ After executing the cookiecutter template, you will have a folder structure
 ready to be integrated with DEEPaaS. The you can decide between starting the
 project from scratch or integrating your existing model with DEEPaaS.
 
-The folder `{{ cookiecutter.__repo_name }}` is designed to contain the source
+The folder `{{ cookiecutter.__model_source }}` is designed to contain the source
 code of your model. You can add your model files there or replace it by another
 repository by using [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-The only requirement is that the folder `{{ cookiecutter.__repo_name }}` contains
+The only requirement is that the folder `{{ cookiecutter.__model_source }}` contains
 an `__init__.py` file conserving the already defined methods. You can edit the
 template functions already defined inside or import your own functions from
-another file. See the [README.md](./{{ cookiecutter.__repo_name }}/README.md)
-in the `{{ cookiecutter.__repo_name }}` folder for more information.
+another file. See the [README.md](./{{ cookiecutter.__model_source }}/README.md)
+in the `{{ cookiecutter.__model_source }}` folder for more information.
 
 Those methods, are used by the subpackage `api` to define the API interface.
 See the project structure section for more information about the `api` folder.
@@ -99,7 +99,7 @@ requirement into the `requirements.txt` file. If the model is not published
 yet, you can add it as a submodule inside or outside the project and install
 it by using `pip install -e <path-to-model>`. In both cases, you will need to
 interface the model with the `api` subpackage with the required methods. See
-the [README.md](./{{ cookiecutter.__repo_name }}/README.md)
+the [README.md](./{{ cookiecutter.__model_source }}/README.md)
 
 ## Documentation
 

@@ -11,7 +11,7 @@ import subprocess
 import sys
 from subprocess import TimeoutExpired
 
-from {{ cookiecutter.__repo_name }}.api import config
+from {{ cookiecutter.__model_source }}.api import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)

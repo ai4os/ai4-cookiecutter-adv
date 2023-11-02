@@ -38,7 +38,7 @@ def create_testdir(config_file):
 
 
 @pytest.fixture(scope="session", name="project")
-def bake_project(cookiecutter_path, testdir, config_args, project_name):
+def bake_project(cookiecutter_path, testdir, config_args, model_name):
     """Fixture to bake a project from a cookiecutter template."""
     cookiecutter(
         template=str(cookiecutter_path),
@@ -46,7 +46,7 @@ def bake_project(cookiecutter_path, testdir, config_args, project_name):
         extra_context=config_args,
         output_dir="project",
     )
-    project_dir = project_name.lower().replace(" ", "_").replace("-", "_")
+    project_dir = model_name.lower().replace(" ", "-") + "-api"
     return Path(testdir) / "project" / project_dir
 
 
@@ -64,15 +64,9 @@ def git_base_url(config_args):
 
 
 @pytest.fixture(scope="session")
-def project_name(config_args):
-    """Fixture to provide project_name."""
-    return config_args.get("project_name", None)
-
-
-@pytest.fixture(scope="session")
-def repo_name(project_name):
-    """Fixture to provide repo_name."""
-    return project_name.lower().replace(" ", "_").replace("-", "_")
+def model_name(config_args):
+    """Fixture to provide model_name."""
+    return config_args.get("model_name", None)
 
 
 @pytest.fixture(scope="session")

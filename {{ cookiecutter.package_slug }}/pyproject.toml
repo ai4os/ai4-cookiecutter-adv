@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "{{ cookiecutter.__repo_name }}"
+name = "{{ cookiecutter.package_slug }}"
 authors = [
 {%- set names = cookiecutter.author_name.split(',') -%}
 {%- set emails = cookiecutter.author_email.split(',') -%}
@@ -24,28 +24,28 @@ classifiers = [
 dynamic = ["version", "dependencies"]
 
 [project.urls]
-"Homepage" = "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}"
-"Bug Tracker" = "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}/issues"
+"Homepage" = "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}"
+"Bug Tracker" = "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}/issues"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 env = [
-    "{{ cookiecutter.__repo_name|upper }}_DATA_PATH=tests/data",
-    "{{ cookiecutter.__repo_name|upper }}_MODELS_PATH=tests/models",
+    "{{ cookiecutter.__model_source|upper }}_DATA_PATH=tests/data",
+    "{{ cookiecutter.__model_source|upper }}_MODELS_PATH=tests/models",
 ]
 # Allow test files to share names
 # https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
 addopts = "--import-mode=importlib"
 
 [tool.setuptools]
-packages = ["{{ cookiecutter.__repo_name }}", "{{ cookiecutter.__repo_name }}.api"]
+packages = ["{{ cookiecutter.__model_source }}", "{{ cookiecutter.__model_source }}.api"]
 
 [tool.setuptools.package-dir]
-"{{ cookiecutter.__repo_name }}.api" = "api"
+"{{ cookiecutter.__model_source }}.api" = "api"
 
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements.txt"] }
 version = { file = "VERSION" }
 
 [project.entry-points."deepaas.v2.model"]
-{{ cookiecutter.__repo_name }} = "{{ cookiecutter.__repo_name }}.api"
+{{ cookiecutter.__model_source }} = "{{ cookiecutter.__model_source }}.api"

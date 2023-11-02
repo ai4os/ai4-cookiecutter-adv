@@ -7,10 +7,10 @@ All functions here are optional and you can add or remove them as you need.
 """
 import logging
 from pathlib import Path
-import {{ cookiecutter.__repo_name }}.config as cfg
+from {{ cookiecutter.__model_source }} import config
 
 logger = logging.getLogger(__name__)
-logger.setLevel(cfg.LOG_LEVEL)
+logger.setLevel(config.LOG_LEVEL)
 
 
 # make data

@@ -13,10 +13,10 @@ from importlib import metadata
 
 # Ensure that your model package has a config.py file with the following
 # pylint: disable=unused-import
-from {{ cookiecutter.__repo_name }}.config import DATA_PATH, MODELS_PATH
+from {{ cookiecutter.__model_source }}.config import DATA_PATH, MODELS_PATH
 
 # Get AI model metadata
-API_NAME = "{{ cookiecutter.__repo_name }}"
+API_NAME = "{{ cookiecutter.package_name }}"
 API_METADATA = metadata.metadata(API_NAME)  # .json
 
 # Fix metadata for emails from pyproject parsing

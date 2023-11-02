@@ -52,9 +52,9 @@ One simple example is to add your scripts in the root of the package:
 Then you can simple execute the scripts from the command line:
 
 ```bash
-$ python -m {{ cookiecutter.__repo_name }}.make_dataset {your_arguments}
-$ python -m {{ cookiecutter.__repo_name }}.make_model {your_arguments}
-$ python -m {{ cookiecutter.__repo_name }}.compare_models {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.make_dataset {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.make_model {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.compare_models {your_arguments}
 ```
 
 With this simple structure, the user expects to be able to execute the
@@ -84,7 +84,7 @@ For example:
 Then you can execute the scripts from the command line including the folder:
 
 ```bash
-$ python -m {{ cookiecutter.__repo_name }}.dataset.make_dataset {your_arguments}
-$ python -m {{ cookiecutter.__repo_name }}.models.make_model {your_arguments}
-$ python -m {{ cookiecutter.__repo_name }}.visualization.compare_models {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.dataset.make_dataset {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.models.make_model {your_arguments}
+$ python -m {{ cookiecutter.__model_source }}.visualization.compare_models {your_arguments}
 ```
