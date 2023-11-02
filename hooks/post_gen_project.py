@@ -16,59 +16,58 @@
 """
 
 import os
-import subprocess as subp
+import subprocess
 import sys
 
 
-repo_name = "{{ cookiecutter.__repo_name }}"
-
-
-def git_ini(repo):
+def git_ini(project_name):
     """Function to initialise git repositories"""
-    gitrepo = os.path.join("{{ cookiecutter.git_base_url }}", repo + ".git")
+    repo = os.path.join(
+        "{{ cookiecutter.git_base_url }}", project_name + ".git"
+    )
 
-    os.chdir(os.path.join("../", repo))
-    subp.call(["git", "init"])
-    subp.call(["git", "add", "."])
-    subp.call(["git", "commit", "-m", "initial commit"])
-    subp.call(["git", "remote", "add", "origin", gitrepo])
+    os.chdir(os.path.join("../", project_name))
+    subprocess.call(["git", "init"])
+    subprocess.call(["git", "add", "."])
+    subprocess.call(["git", "commit", "-m", "initial commit"])
+    subprocess.call(["git", "remote", "add", "origin", repo])
 
     # create test branch automatically
-    subp.call(["git", "checkout", "-b", "test"])
+    subprocess.call(["git", "checkout", "-b", "test"])
     # adjust [Build Status] for the test branch
     readme_content = []
-    with open("README.md") as f_old:
+    with open("README.md", encoding="utf-8") as f_old:
         for line in f_old:
             if "[![Build Status]" in line:
                 line = line.replace("/main)", "/test)")
             readme_content.append(line)
 
-    with open("README.md", "w") as f_new:
+    with open("README.md", "w", encoding="utf-8") as f_new:
         for line in readme_content:
             f_new.write(line)
 
-    subp.call(
+    subprocess.call(
         ["git", "commit", "-a", "-m", "update README.md for the BuildStatus"]
     )
 
     # switch back to master
-    subp.call(["git", "checkout", "main"])
-
-    return gitrepo
+    subprocess.call(["git", "checkout", "main"])
+    return repo
 
 
 try:
     # initialized both git repositories
-    git_user_app = git_ini(repo_name)
+    git_repo_url = git_ini("{{ cookiecutter.package_slug }}")
     message = f"""
 ------ SUCCESS ------
-[Info] {repo_name} was created successfully,
-       Don't forget to create corresponding remote repository: {git_user_app}
+[Info] {{ cookiecutter.package_slug }} was created successfully,
+       Don't forget to create corresponding remote repository: {git_repo_url}
        then you can do 'git push origin --all'")
 """
     print(message)
 
-except Exception as e:
+except subprocess.CalledProcessError as e:
+    message = f"Something went wrong: {repr(e)}"
     message = f"Something went wrong: {repr(e)}"
     print("[ERROR]: " + message)
     sys.exit(message)
