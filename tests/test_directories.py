@@ -2,7 +2,7 @@ import pytest
 import os
 
 
-@pytest.mark.parametrize("config_file", ["config-1"], indirect=True)
+@pytest.mark.parametrize("config_file", ["config-1", "submodule"], indirect=True)
 def test_has_source_folder(project, model_name):
     model_source = model_name.lower().replace(" ", "_").replace("-", "_")
     assert os.path.exists(project / model_source)

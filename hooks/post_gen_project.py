@@ -72,6 +72,14 @@ def create_branch(project_name, branch):
         subprocess.call(["git", "checkout", "main"])
 
 
+def add_submodule(project_name, submodule_name, submodule_url):
+    """Function to add submodules"""
+    with context_chdir(Path(f"../{project_name}")):
+        subprocess.call(["git", "submodule", "add", submodule_url, submodule_name])
+        subprocess.call(["git", "commit", "-m", f"Add {submodule_name} submodule"])
+        subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
+
+
 # -----------------------------------------------------------------------------
 # Run post generation actions, exit with error
 try:
@@ -82,14 +90,26 @@ try:
 
     # Initialise git repository and create test and dev branches
     git_repo_url = git_init(
-        "{{ cookiecutter.git_base_url }}", "{{ cookiecutter.package_slug }}"
+        base_url="{{ cookiecutter.git_base_url }}",
+        project_name="{{ cookiecutter.package_slug }}",
     )
+
+    # Add model as submodules if needed
+    if "{{ cookiecutter.add_model_template }}" == "False":
+        if "{{ cookiecutter.add_model_from_repo }}":
+            add_submodule(
+                project_name="{{ cookiecutter.package_slug }}",
+                submodule_name="{{ cookiecutter.__model_source }}",
+                submodule_url="{{ cookiecutter.add_model_from_repo }}",
+            )
+
+    # Create test and dev branches
     create_branch("{{ cookiecutter.package_slug }}", branch="test")
     create_branch("{{ cookiecutter.package_slug }}", branch="dev")
 
     # Log success information
     logging.info("Project {{ cookiecutter.package_slug }} created successfully")
-    logging.info("Don't forget to create the remote repo: %s", git_repo_url)
+    logging.info("Don't forget to create the remote repository: %s", git_repo_url)
 
 
 except subprocess.CalledProcessError as err:
