@@ -12,7 +12,7 @@ from your_module import your_function as training
 # TODO: add your imports here
 import logging
 from pathlib import Path
-import {{ cookiecutter.__model_source }} import config
+from {{ cookiecutter.__model_source }} import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)
