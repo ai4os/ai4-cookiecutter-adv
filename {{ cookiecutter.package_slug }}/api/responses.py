@@ -8,7 +8,6 @@ need to modify them for your needs.
 import io
 import logging
 
-import numpy as np
 from fpdf import FPDF
 
 from {{ cookiecutter.__model_source }}.api import config
@@ -39,8 +38,8 @@ def json_response(result, **options):
     try:
         if isinstance(result, (dict, list, str)):
             return result
-        if isinstance(result, np.ndarray):
-            return result.tolist()
+        # if isinstance(result, np.ndarray):
+        #     return result.tolist()
         return dict(result)
     except Exception as err:  # TODO: Fix to specific exception
         logger.warning("Error converting result to json: %s", err)
