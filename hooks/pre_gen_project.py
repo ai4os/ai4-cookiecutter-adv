@@ -81,7 +81,7 @@ def validate_app_version():
 
 
 # -----------------------------------------------------------------------------
-# If any of the validation checks failed, exit with error
+# If any of the validation, exit with error
 try:
     validate_git_base_url()
     validate_model_name()
