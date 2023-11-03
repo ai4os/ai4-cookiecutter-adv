@@ -38,7 +38,12 @@ env = [
 addopts = "--import-mode=importlib"
 
 [tool.setuptools]
-packages = ["{{ cookiecutter.__model_source }}", "{{ cookiecutter.__model_source }}.api"]
+packages = [
+{%- if cookiecutter.add_model_template %}
+    "{{ cookiecutter.__model_source }}",
+{%- endif %}
+    "{{ cookiecutter.__model_source }}.api",
+]
 
 [tool.setuptools.package-dir]
 "{{ cookiecutter.__model_source }}.api" = "api"
