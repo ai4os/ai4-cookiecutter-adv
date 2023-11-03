@@ -12,18 +12,28 @@ There are different versions of this template:
 - [child-module](https://github.com/deephdc/cookiecutter-deep/tree/child-module): this is a fork of the `master` branch specifically tailored to users performing a retraining of an existing module. It only creates a Docker repo whose container is based on an existing module's Docker image.
 - [advanced](https://github.com/deephdc/cookiecutter-deep/tree/advanced): this is a more advanced template. It makes more assumptions on how to structure projects and adds more files than those strictly needed for integration. Unless you are looking for some specific feature, you are probably safer using master.
 
-To create a new template of your project, install cookiecutter and run it with this template:
+# Advanced template
+
+To create a new template of your project, install cookiecutter and run it with this command:
 
 ```bash
 pip install cookiecutter
 cookiecutter https://github.com/deephdc/cookiecutter-deep.git --checkout advanced
 ```
 
-Once you answer all the questions, the project directory will be created as a
-git repository with two branches: `master` and `test`.
+With the advanced template, there are 3 different options to implement your project:
+
+1. `Add model template` (default): This option will create in the template a folder with the basic structure to implement your model.
+2. `Add model from repository`: This option will import your model from a git repository as submodule. You will need to introduce the git repository URL.
+3. `Model in requirements.txt`: If you neither want to add a model template nor import a model from a git repository, you can add the model in the `requirements.txt` file.
+
+> For options 2 and 3, you need to edit or ensure the variables required by the API module are available, e.i. `DATA_PATH` and `MODELS_PATH`.
+
+Once you answer all the questions, the project directory will be created as a git repository with two branches: `master` and `test`.
 This is what the folder structures look like:
 
 ## Project structure
+
 ```
 ├── Jenkinsfile             <- Describes basic Jenkins CI/CD pipeline
 ├── Dockerfile              <- Steps to build a DEEPaaS API Docker image
@@ -32,6 +42,7 @@ This is what the folder structures look like:
 ├── VERSION                 <- Version file indicating the version of the model
 │
 ├── <your-model-source>     <- Source code for use in this project.
+|   |                          (only if add_model_template/from_repo)
 │   ├── README.md           <- Model README for developers using this model.
 │   ├── __init__.py         <- Makes <your-model-source> a Python module
 │   ├── ...                 <- Other source code files
