@@ -28,7 +28,7 @@ def test_authors(metadata):
 def test_emails(metadata):
     """Tests that metadata provides authors information."""
     assert "author-email" in metadata
-    assert metadata["Author-email"] == {
+    assert metadata["author-email"] == {
         "{{ cookiecutter.author_name }}": "{{ cookiecutter.author_email }}"
     }
 
@@ -36,13 +36,13 @@ def test_emails(metadata):
 def test_description(metadata):
     """Tests that metadata provides description information."""
     assert "description" in metadata
-    assert metadata["Description"] == "{{ cookiecutter.description }}"
+    assert metadata["description"] == "{{ cookiecutter.description }}"
 
 
 def test_license(metadata):
     """Tests that metadata provides license information."""
     assert "license" in metadata
-    assert metadata["License"] == "{{ cookiecutter.open_source_license }}"
+    assert metadata["license"] == "{{ cookiecutter.open_source_license }}"
 
 
 def test_version(metadata):
