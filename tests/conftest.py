@@ -60,13 +60,21 @@ def pyproject(project):
 @pytest.fixture(scope="session")
 def git_base_url(config_args):
     """Fixture to provide git_base_url."""
-    return config_args.get("git_base_url", None)
+    default = "https://github.com/deephdc"
+    return config_args.get("git_base_url", default)
 
 
 @pytest.fixture(scope="session")
 def model_name(config_args):
     """Fixture to provide model_name."""
     return config_args.get("model_name", None)
+
+
+@pytest.fixture(scope="session")
+def package_slug(config_args, model_name):
+    """Fixture to provide package_slug."""
+    default = f"{model_name.lower().replace(' ', '-')}-api"
+    return config_args.get("package_slug", default)
 
 
 @pytest.fixture(scope="session")
@@ -84,46 +92,46 @@ def author_email(config_args):
 @pytest.fixture(scope="session")
 def description(config_args):
     """Fixture to provide description."""
-    return config_args.get("description", None)
+    return config_args.get("description", "")
 
 
 @pytest.fixture(scope="session")
 def app_version(config_args):
     """Fixture to provide app_version."""
-    return config_args.get("app_version", None)
+    return config_args.get("app_version", "0.0.1")
 
 
 @pytest.fixture(scope="session")
 def open_source_license(config_args):
     """Fixture to provide open_source_license."""
-    return config_args.get("open_source_license", None)
+    return config_args.get("open_source_license", "MIT")
 
 
 @pytest.fixture(scope="session")
 def dockerhub_user(config_args):
     """Fixture to provide dockerhub_user."""
-    return config_args.get("dockerhub_user", None)
+    return config_args.get("dockerhub_user", "deephdc")
 
 
 @pytest.fixture(scope="session")
 def docker_baseimage(config_args):
     """Fixture to provide docker_baseimage."""
-    return config_args.get("docker_baseimage", None)
+    return config_args.get("docker_baseimage", "tensorflow/tensorflow")
 
 
 @pytest.fixture(scope="session")
 def baseimage_cpu_tag(config_args):
     """Fixture to provide baseimage_cpu_tag."""
-    return config_args.get("baseimage_cpu_tag", None)
+    return config_args.get("baseimage_cpu_tag", "2.9.1")
 
 
 @pytest.fixture(scope="session")
 def baseimage_gpu_tag(config_args):
     """Fixture to provide baseimage_gpu_tag."""
-    return config_args.get("baseimage_gpu_tag", None)
+    return config_args.get("baseimage_gpu_tag", "2.9.1-gpu")
 
 
 @pytest.fixture(scope="session")
 def failure_notify(config_args):
     """Fixture to provide failure_notify."""
-    return config_args.get("failure_notify", None)
+    return config_args.get("failure_notify", False)
