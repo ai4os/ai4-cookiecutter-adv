@@ -29,6 +29,6 @@
         "docker_baseimage": "Docker image your Dockerfile starts from (FROM <docker_baseimage>).\n\tDo not provide the tag, yet:\n",
         "baseimage_cpu_tag": "CPU tag for the baseimage, e.g. 2.9.1\n\tShould match and use python3!:\n",
         "baseimage_gpu_tag": "GPU tag for the baseimage, e.g. 2.9.1-gpu\n\tShould match and use python3!:\n",
-        "failure_notify": "Receive an email if module build fails:"
+        "failure_notify": "Receive an email if module build fails:\n"
     }
 }
