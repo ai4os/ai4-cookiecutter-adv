@@ -11,6 +11,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
 
 # -----------------------------------------------------------------------------
 # Use contextlib.chdir when python.version >= 3.11
@@ -74,7 +76,8 @@ def create_branch(project_name, branch):
 # Run post generation actions, exit with error
 try:
     # remove model source if not needed
-    if "{{ cookiecutter.add_model_source }}" == False:
+    if "{{ cookiecutter.add_model_template }}" == "False":
+        logging.info("Removing model source folder")
         shutil.rmtree("{{ cookiecutter.__model_source }}")
 
     # Initialise git repository and create test and dev branches

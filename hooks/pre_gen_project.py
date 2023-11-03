@@ -9,11 +9,11 @@ import logging
 import re
 from urllib.parse import urlparse
 
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 FOLDER_REGEX = r"^[a-zA-Z0-9_-]+$"
 MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 APP_VERSION_REGEX = r"^\d+\.\d+\.\d+$"
-error = False
 
 
 # -----------------------------------------------------------------------------
