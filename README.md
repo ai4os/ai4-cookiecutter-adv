@@ -25,7 +25,7 @@ With the advanced template, there are 3 different options to implement your proj
 
 1. `Add model template` (default): This option will create in the template a folder with the basic structure to implement your model.
 2. `Add model from repository`: This option will import your model from a git repository as submodule. You will need to introduce the git repository URL.
-3. `Model in requirements.txt`: If you neither want to add a model template nor import a model from a git repository, you can add the model in the `requirements.txt` file.
+3. `Model in requirements.txt`: If you do not want the model source code in the repository (via any of the last 2 options), you can add the model package to `requirements.txt` file.
 
 > For options 2 and 3, you need to edit or ensure the variables required by the API module are available, e.i. `DATA_PATH` and `MODELS_PATH`.
 
