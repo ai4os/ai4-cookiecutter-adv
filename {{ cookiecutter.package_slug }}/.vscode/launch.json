@@ -9,6 +9,7 @@
             "type": "python",
             "request": "launch",
             "module": "deepaas.cmd.run",
+            // "args": [ "--config-file=deepaas.conf" ],
             "args": [ "--listen-ip=0.0.0.0" ],
             "envFile": "${workspaceFolder}/.env",
             "justMyCode": true,
