@@ -29,9 +29,9 @@ class Dataset(fields.String):
     """
 
     def _deserialize(self, value, attr, data, **kwargs):
-        if value not in utils.ls_dirs(config.DATA_PATH / "processed"):
+        if value not in utils.ls_dirs(config.DATA_PATH):
             raise ValidationError(f"Dataset `{value}` not found.")
-        return str(config.DATA_PATH / "processed" / value)
+        return str(config.DATA_PATH / value)
 
 
 # EXAMPLE of Prediction Args description
