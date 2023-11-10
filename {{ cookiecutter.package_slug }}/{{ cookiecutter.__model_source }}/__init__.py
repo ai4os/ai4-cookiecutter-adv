@@ -29,7 +29,7 @@ def warm(**kwargs):
 
 # TODO: predict
 # = HAVE TO MODIFY FOR YOUR NEEDS =
-def predict(**kwargs):
+def predict(model_name, input_file, **options):
     """Main/public method to perform prediction
     """
     # if necessary, preprocess data
@@ -44,7 +44,7 @@ def predict(**kwargs):
 
 # TODO: train
 # = HAVE TO MODIFY FOR YOUR NEEDS =
-def train(**kwargs):
+def train(model_name, input_file, **options):
     """Main/public method to perform training
     """
     # prepare the dataset, e.g.

@@ -79,7 +79,7 @@ def predict(model_name, input_file, accept='application/json', **options):
         logger.info("Using model %s for predictions", model_name)
         logger.debug("Loading data from input_file: %s", input_file.filename)
         logger.debug("Predict with options: %s", options)
-        result = aimodel.predict(input_file.filename, model_name, **options)
+        result = aimodel.predict(model_name, input_file.filename, **options)
         logger.debug("Predict result: %s", result)
         logger.info("Returning content_type for: %s", accept)
         return responses.content_types[accept](result, **options)
