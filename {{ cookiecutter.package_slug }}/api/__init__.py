@@ -8,8 +8,6 @@ docs [1] and at a canonical exemplar module [2].
 """
 import logging
 
-from aiohttp.web import HTTPException
-
 import {{ cookiecutter.__model_source }} as aimodel
 
 from {{ cookiecutter.__model_source }}.api import config, responses, schemas, utils
@@ -35,14 +33,14 @@ def get_metadata():
             "description": config.API_METADATA.get("summary"),
             "license": config.API_METADATA.get("license"),
             "version": config.API_METADATA.get("version"),
-            "datasets": utils.ls_dirs(config.DATA_PATH),
+            "datasets": utils.ls_files(config.DATA_PATH, '[A-Za-z0-9]*'),
             "models": utils.ls_dirs(config.MODELS_PATH),
         }
         logger.debug("Package model metadata: %s", metadata)
         return metadata
     except Exception as err:
         logger.error("Error collecting metadata: %s", err, exc_info=True)
-        raise HTTPException(reason=err) from err
+        raise  # Reraise the exception after log
 
 
 def warm():
@@ -85,7 +83,7 @@ def predict(model_name, input_file, accept='application/json', **options):
         return responses.content_types[accept](result, **options)
     except Exception as err:
         logger.error("Error calculating predictions: %s", err, exc_info=True)
-        raise HTTPException(reason=err) from err
+        raise  # Reraise the exception after log
 
 
 @utils.train_arguments(schema=schemas.TrainArgsSchema)
