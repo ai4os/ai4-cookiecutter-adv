@@ -67,7 +67,10 @@ target/
 .idea
 
 # VS Code
-.vscode/
+.vscode/*
+!{{ cookiecutter.package_slug }}/.vscode/*
+!{{ cookiecutter.package_slug }}/.vscode/launch.json
+!{{ cookiecutter.package_slug }}/.vscode/settings.json
 
 # Spyder
 .spyproject/
