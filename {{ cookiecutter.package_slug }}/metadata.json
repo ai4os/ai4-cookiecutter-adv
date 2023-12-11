@@ -13,13 +13,13 @@
     "license": "{{ cookiecutter.open_source_license }}",
     "date_creation": "{% now 'utc', '%Y-%m-%d' %}",
     "sources": {
-        "dockerfile_repo": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}",
-        "docker_registry_repo": "{{ cookiecutter.dockerhub_user }}/{{ cookiecutter.package_slug }}",
-        "code": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}"
+        "dockerfile_repo": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__model_source }}",
+        "docker_registry_repo": "{{ cookiecutter.dockerhub_user }}/{{ cookiecutter.__model_source }}",
+        "code": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__model_source }}"
     },
     "continuous_integration": {
-        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.package_slug }}/master",
-        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.package_slug }}/job/master"
+        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/{{ cookiecutter.__model_source }}/master",
+        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/{{ cookiecutter.__model_source }}/job/master"
     },
     "tosca": [
         {
