@@ -1,0 +1,41 @@
+# .sqa/config.yml - jenkins-pipeline-library configuration file
+
+# generic configuration: workspace, agents
+config:
+  project_repos:
+    demo-advanced:
+      repo: "{{ cookiecutter.git_base_url }}/{{ __model_source }}.git"
+      branch: main
+
+sqa_criteria:
+  qc_style:
+    repos:
+      demo-advanced:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.sty
+  qc_coverage:
+    repos:
+      demo-advanced:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.cov
+  qc_security:
+    repos:
+      demo-advanced:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.sec
+
+environment:
+  GIT_COMMITTER_NAME: "{{ cookiecutter.author_name }}"
+  GIT_COMMITTER_EMAIL: "{{ cookiecutter.author_email }}"
+  LANG: C.UTF-8
+
+timeout: 600

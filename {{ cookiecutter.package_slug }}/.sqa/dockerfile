@@ -1,0 +1,7 @@
+# Docker image for CI testing of the DEEPaaS API
+# Note there is probably no gpu in the CI server
+ARG tag={{ cookiecutter.baseimage_cpu_tag }}
+FROM {{ cookiecutter.docker_baseimage }}:${tag}
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip3 install --no-cache-dir tox
+CMD ["sleep", "infinity"]
