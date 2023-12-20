@@ -1,12 +1,4 @@
 # .sqa/config.yml - jenkins-pipeline-library configuration file
-
-# generic configuration: workspace, agents
-config:
-  project_repos:
-    demo-advanced:
-      repo: "{{ cookiecutter.git_base_url }}/{{ __model_source }}.git"
-      branch: main
-
 sqa_criteria:
   qc_style:
     repos:
