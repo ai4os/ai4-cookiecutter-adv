@@ -91,6 +91,6 @@ This is what the folder structures look like:
 ```
 
 More extended documentation can be found [here](http://docs.deep-hybrid-datacloud.eu/en/latest/user/overview/cookiecutter-template.html).
-If you want to look at a minimal app using this template structure check [demo_app](https://github.com/deephdc/demo_app).
+If you want to look at a minimal app using this template structure check [demo-advanced](https://github.com/ai4os-hub/demo-advanced).
 
 Run the cookiecutter tests with `python -m pytest tests`.
