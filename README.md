@@ -6,9 +6,11 @@
 
 ## For users
 
-This is an advanced template for developing new modules in the AI4OS Platform. It uses [Cookiecutter](https://cookiecutter.readthedocs.io) to generate the templates. This template is based on the  [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/) template. It makes more assumptions on how to structure projects and adds more files compared to the "main" version. If you want to integrate an already existing AI code, which you still want to keep in a separate repository, this template is for you.
+This is an **advanced** template for developing new modules in the AI4OS Platform. It uses [Cookiecutter](https://cookiecutter.readthedocs.io) to generate the templates. This template is based on the  [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/) template. It makes more assumptions on how to structure projects and adds more files compared to the "main" version.
 
-There are different versions of the template:
+If you want to integrate an already existing AI code, which you still want to keep in a separate repository, this template is for you.
+
+There available other versions of the template:
 
 * [main](https://github.com/ai4os/ai4-template): this is a minimal version of the AI4OS Hub template: Simple template, with the minimum requirements to integrate your AI model in AI4OS Hub.
 
@@ -22,7 +24,7 @@ pip install cookiecutter
 cookiecutter https://github.com/ai4os/ai4-template-adv.git
 ```
 * OR visit our Templates Hub service: https://templates.cloud.ai4eosc.eu/ and select the template
-```
+
 
 With the advanced template, there are 3 different options to implement your project:
 
@@ -93,7 +95,7 @@ This is what the folder structures look like:
 └── tox.ini                 <- tox file with settings for running tox; see tox.testrun.org
 ```
 
-More extended documentation can be found [here](http://docs.deep-hybrid-datacloud.eu/en/latest/user/overview/cookiecutter-template.html).
+More extended documentation can be found [here](http://docs.ai4os.eu/en/latest/user/overview/cookiecutter-template.html).
 If you want to look at a minimal app using this template structure check [demo-advanced](https://github.com/ai4os-hub/demo-advanced).
 
 Run the cookiecutter tests with `python -m pytest tests`.
