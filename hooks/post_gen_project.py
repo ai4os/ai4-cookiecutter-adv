@@ -13,6 +13,7 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
+defaultbranch = 'main'
 
 # -----------------------------------------------------------------------------
 # Use contextlib.chdir when python.version >= 3.11
@@ -48,7 +49,7 @@ def git_init(base_url, project_name):
     """Function to initialise git repositories"""
     repo = f"{base_url}/{project_name}.git"
     with context_chdir(Path(f"../{project_name}")):
-        subprocess.call(["git", "init"])
+        subprocess.call(["git", "init", "-b", defaultbranch])
         subprocess.call(["git", "add", "."])
         subprocess.call(["git", "commit", "-m", "initial commit"])
         subprocess.call(["git", "remote", "add", "origin", repo])

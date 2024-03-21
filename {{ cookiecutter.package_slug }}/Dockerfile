@@ -1,14 +1,14 @@
 # Dockerfile may have following Arguments:
 # tag - tag for the Base image, (e.g. 2.9.1 for tensorflow)
-# branch - user repository branch to clone, i.e. test (default: master)
+# branch - user repository branch to clone, i.e. test (default: main)
 #
 # To build the image:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> --build-arg arg=value .
 # or using default args:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> .
 #
-# [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside the
-# Jenkinsfile, not here!
+# Be Aware! For the Jenkins CI/CD pipeline, 
+# input args are defined inside the JenkinsConstants.groovy, not here!
 
 ARG tag={{ cookiecutter.baseimage_cpu_tag }}
 
@@ -46,17 +46,13 @@ WORKDIR /srv
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER yes
 
-# Install deep-start script
-# N.B.: This repository also contains run_jupyter.sh
-RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
-    ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start && \
-    ln -s /srv/.deep-start/run_jupyter.sh /usr/local/bin/run_jupyter
+# Initialization scripts
+# deep-start can install JupyterLab or VSCode if requested
+RUN git clone https://github.com/ai4os/deep-start /srv/.deep-start && \
+    ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start
 
-# Install JupyterLab
-ENV JUPYTER_CONFIG_DIR /srv/.deep-start/
 # Necessary for the Jupyter Lab terminal
 ENV SHELL /bin/bash
-RUN pip3 install --no-cache-dir jupyterlab
 
 # Install Data Version Control
 RUN pip3 install --no-cache-dir dvc dvc-webdav
