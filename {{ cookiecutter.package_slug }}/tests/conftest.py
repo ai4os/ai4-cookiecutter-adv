@@ -84,6 +84,16 @@ globals()["predict_kwds"] = generate_fields_fixture(signature)
 @pytest.fixture(scope="module")
 def predictions(predict_kwds):
     """Fixture to return predictions to assert properties."""
+    # # Define your expected predictions for your model
+    # predictions = np.random.dirichlet(np.ones(10), size=[20])
+    # model = create_autospec(
+    #     models.Model, predict=create_autospec(models.Model.predict)
+    # )
+    # model.predict.return_value = predictions
+    # # Patching the load_model from your used framework
+    # with patch("keras.models.load_model", autospec=True) as load:
+    #     load.return_value = model
+    #     return api.predict(**predict_kwds)
     return api.predict(**predict_kwds)
 
 
@@ -96,4 +106,17 @@ globals()["training_kwds"] = generate_fields_fixture(signature)
 @pytest.fixture(scope="module")
 def training(training_kwds):
     """Fixture to return training to assert properties."""
+    # # Define your expected fit results for your model
+    # train_results = {
+    #     "loss": [random() for _ in range(20)],
+    #     "categorical_accuracy": [random() for _ in range(20)],
+    # }
+    # model = create_autospec(
+    #     models.Model, fit=create_autospec(models.Model.fit)
+    # )
+    # model.fit.return_value = train_results
+    # # Patching the load_model from your used framework
+    # with patch("keras.models.load_model", autospec=True) as load:
+    #     load.return_value = model
+    #     return api.train(**training_kwds)
     return api.train(**training_kwds)
