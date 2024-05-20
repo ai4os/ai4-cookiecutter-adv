@@ -35,6 +35,7 @@
             "MIT": "MIT",
             "Apache 2.0":  "Apache 2.0",
             "BSD-3-Clause": "BSD-3-Clause",
+            "AGPL-3.0-only": "AGPL-3.0-only",
             "No license file": "No license file"
          },
         "dockerhub_user": "\nUser account at hub.docker.com, e.g.\n\t'ai4oshub' in https://hub.docker.com/u/ai4oshub.\n",
