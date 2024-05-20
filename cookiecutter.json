@@ -10,7 +10,7 @@
     "author_email": "",
     "description": "",
     "app_version": "0.0.1",
-    "open_source_license": [ "MIT", "Apache 2.0", "BSD-3-Clause", "No license file" ],
+    "open_source_license": [ "MIT", "Apache 2.0", "BSD-3-Clause", "AGPL-3.0-only", "No license file" ],
     "dockerhub_user": "ai4oshub",
     "docker_baseimage": "tensorflow/tensorflow",
     "baseimage_cpu_tag": "2.9.1",
@@ -33,11 +33,11 @@
         "open_source_license": {
             "__prompt__": "Select one of the licenses, default is MIT. For more info: https://opensource.org/licenses",
             "MIT": "MIT",
-            "Apache 2.0":  "Apache 2.0",
+            "Apache 2.0": "Apache 2.0",
             "BSD-3-Clause": "BSD-3-Clause",
             "AGPL-3.0-only": "AGPL-3.0-only",
             "No license file": "No license file"
-         },
+        },
         "dockerhub_user": "\nUser account at hub.docker.com, e.g.\n\t'ai4oshub' in https://hub.docker.com/u/ai4oshub.\n",
         "docker_baseimage": "\nDocker image your Dockerfile starts from (FROM <docker_baseimage>).\n\tDo not provide the tag, yet\n",
         "baseimage_cpu_tag": "\nCPU tag for the baseimage, e.g. 2.9.1.\n\tShould match and use python3\n",
