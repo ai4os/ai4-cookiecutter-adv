@@ -30,6 +30,7 @@ def test_data_folder(project):
 
 
 @pytest.mark.parametrize("config_file", ["config-1"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_docker_folder(project):
     raise NotImplementedError  # TODO: implement your test here
 
