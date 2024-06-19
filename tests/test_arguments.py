@@ -10,7 +10,7 @@ def test_git_base_url(pyproject, git_base_url, repo_name):
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
 def test_project_name(pyproject, project_name):
-    correct_name = project_name.lower().replace(" ", "-") + "-api"
+    correct_name = project_name.lower().replace(" ", "-")
     assert pyproject["project"]["name"] == correct_name
 
 
