@@ -34,30 +34,36 @@ def test_app_version(project, app_version):
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_open_source_license(project, open_source_license):
     raise NotImplementedError  # TODO: implement your test here
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_dockerhub_user(project, dockerhub_user):
     raise NotImplementedError  # TODO: implement your test here
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_docker_baseimage(project, docker_baseimage):
     raise NotImplementedError  # TODO: implement your test here
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_baseimage_cpu_tag(project, baseimage_cpu_tag):
     raise NotImplementedError  # TODO: implement your test here
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_baseimage_gpu_tag(project, baseimage_gpu_tag):
     raise NotImplementedError  # TODO: implement your test here
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_failure_notify(project, failure_notify):
     raise NotImplementedError  # TODO: implement your test here
