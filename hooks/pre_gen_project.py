@@ -32,28 +32,25 @@ def validate_project_name():
     if len(project_name) < 2:
         logging.error("Invalid project name (%s), length < 2", project_name)
         raise ValueError("Invalid project name")
+    if len(project_name.split(" ")) > 4:
+        logging.error("Invalid project name (%s), words > 4", project_name)
+        raise ValueError("Invalid project name")
 
 
-def validate_model_slug():
-    """Validate model_slug"""
-    model_slug = "{{ cookiecutter.__repo_name }}"
-    if len(model_slug) < 2:
-        logging.error("Invalid model slug (%s), length < 2", model_slug)
-        raise ValueError("Invalid model slug")
-    if not re.match(FOLDER_REGEX, model_slug):
-        logging.error("Invalid characters in model slug (%s)", model_slug)
-        raise ValueError("Invalid model slug")
+def validate_repo_name():
+    """Validate repo_name"""
+    repo_name = "{{ cookiecutter.__repo_name }}"
+    if not re.match(FOLDER_REGEX, repo_name):
+        logging.error("Invalid characters in repo name (%s)", repo_name)
+        raise ValueError("Invalid repository parsing")
 
 
-def validate_package_name():
-    """Validate package_name"""
-    package_name = "{{ cookiecutter.__app_name }}"
-    if len(package_name) < 2:
-        logging.error("Invalid package name (%s), length < 2", package_name)
-        raise ValueError("Invalid package name")
-    if not re.match(MODULE_REGEX, package_name):
-        logging.error("Invalid package name (%s)", package_name)
-        raise ValueError("Invalid package name")
+def validate_app_name():
+    """Validate app_name"""
+    app_name = "{{ cookiecutter.__app_name }}"
+    if not re.match(MODULE_REGEX, app_name):
+        logging.error("Invalid package name (%s)", app_name)
+        raise ValueError("Invalid package name parsing")
 
 
 # -----------------------------------------------------------------------------
@@ -85,8 +82,8 @@ def validate_app_version():
 try:
     validate_git_base_url()
     validate_project_name()
-    validate_model_slug()
-    validate_package_name()
+    validate_repo_name()
+    validate_app_name()
     validate_authors()
     validate_app_version()
 except ValueError as err:
