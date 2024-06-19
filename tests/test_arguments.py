@@ -2,15 +2,15 @@ import pytest
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_git_base_url(pyproject, git_base_url, package_slug):
+def test_git_base_url(pyproject, git_base_url, repo_name):
     urls = pyproject["project"]["urls"]
-    assert urls["Homepage"] == f"{git_base_url}/{package_slug}"
-    assert urls["Bug Tracker"] == f"{git_base_url}/{package_slug}/issues"
+    assert urls["Homepage"] == f"{git_base_url}/{repo_name}"
+    assert urls["Bug Tracker"] == f"{git_base_url}/{repo_name}/issues"
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_project_name(pyproject, model_name):
-    correct_name = model_name.lower().replace(" ", "-") + "-api"
+def test_project_name(pyproject, project_name):
+    correct_name = project_name.lower().replace(" ", "-") + "-api"
     assert pyproject["project"]["name"] == correct_name
 
 

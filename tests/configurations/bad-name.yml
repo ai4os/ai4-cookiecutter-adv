@@ -1,5 +1,5 @@
 git_base_url: "https://github.com/deephdc/DrivenData"
-model_name: "Driven-Data"
+project_name: "Driven-Data"
 author_name: "VK, BE"
 author_email: "v.k@example.com, b.e@example.com"
 description: "Some dummy example"

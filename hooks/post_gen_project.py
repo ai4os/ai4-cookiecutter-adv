@@ -87,29 +87,29 @@ try:
     # remove model source if not needed
     if "{{ cookiecutter.add_model_template }}" == "False":
         logging.info("Removing model source folder")
-        shutil.rmtree("{{ cookiecutter.__model_source }}")
+        shutil.rmtree("{{ cookiecutter.__app_name }}")
 
     # Initialise git repository and create test and dev branches
     git_repo_url = git_init(
         base_url="{{ cookiecutter.git_base_url }}",
-        project_name="{{ cookiecutter.package_slug }}",
+        project_name="{{ cookiecutter.__repo_name }}",
     )
 
     # Add model as submodules if needed
     if "{{ cookiecutter.add_model_template }}" == "False":
         if "{{ cookiecutter.add_model_from_repo }}":
             add_submodule(
-                project_name="{{ cookiecutter.package_slug }}",
-                submodule_name="{{ cookiecutter.__model_source }}",
+                project_name="{{ cookiecutter.__repo_name }}",
+                submodule_name="{{ cookiecutter.__app_name }}",
                 submodule_url="{{ cookiecutter.add_model_from_repo }}",
             )
 
     # Create test and dev branches
-    create_branch("{{ cookiecutter.package_slug }}", branch="test")
-    create_branch("{{ cookiecutter.package_slug }}", branch="dev")
+    create_branch("{{ cookiecutter.__repo_name }}", branch="test")
+    create_branch("{{ cookiecutter.__repo_name }}", branch="dev")
 
     # Log success information
-    logging.info("Project {{ cookiecutter.package_slug }} created successfully")
+    logging.info("Project {{ cookiecutter.__repo_name }} created successfully")
     logging.info("Don't forget to create the remote repository: %s", git_repo_url)
 
 

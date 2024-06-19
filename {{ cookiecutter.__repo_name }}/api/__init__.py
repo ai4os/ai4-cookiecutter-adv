@@ -8,9 +8,9 @@ docs [1] and at a canonical exemplar module [2].
 """
 import logging
 
-import {{ cookiecutter.__model_source }} as aimodel
+import {{ cookiecutter.__app_name }} as aimodel
 
-from {{ cookiecutter.__model_source }}.api import config, responses, schemas, utils
+from {{ cookiecutter.__app_name }}.api import config, responses, schemas, utils
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)

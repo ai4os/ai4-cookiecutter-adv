@@ -7,7 +7,7 @@ All functions here are optional and you can add or remove them as you need.
 """
 import logging
 from pathlib import Path
-from {{ cookiecutter.__model_source }} import config
+from {{ cookiecutter.__app_name }} import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)

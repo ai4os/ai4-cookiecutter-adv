@@ -26,17 +26,17 @@ def validate_git_base_url():
 
 
 # -----------------------------------------------------------------------------
-def validate_model_name():
-    """Validate model_name"""
-    model_name = "{{ cookiecutter.model_name }}"
-    if len(model_name) < 2:
-        logging.error("Invalid project name (%s), length < 2", model_name)
+def validate_project_name():
+    """Validate project_name"""
+    project_name = "{{ cookiecutter.project_name }}"
+    if len(project_name) < 2:
+        logging.error("Invalid project name (%s), length < 2", project_name)
         raise ValueError("Invalid project name")
 
 
 def validate_model_slug():
     """Validate model_slug"""
-    model_slug = "{{ cookiecutter.package_slug }}"
+    model_slug = "{{ cookiecutter.__repo_name }}"
     if len(model_slug) < 2:
         logging.error("Invalid model slug (%s), length < 2", model_slug)
         raise ValueError("Invalid model slug")
@@ -47,7 +47,7 @@ def validate_model_slug():
 
 def validate_package_name():
     """Validate package_name"""
-    package_name = "{{ cookiecutter.package_name }}"
+    package_name = "{{ cookiecutter.__app_name }}"
     if len(package_name) < 2:
         logging.error("Invalid package name (%s), length < 2", package_name)
         raise ValueError("Invalid package name")
@@ -84,7 +84,7 @@ def validate_app_version():
 # If any of the validation, exit with error
 try:
     validate_git_base_url()
-    validate_model_name()
+    validate_project_name()
     validate_model_slug()
     validate_package_name()
     validate_authors()

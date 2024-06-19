@@ -1,8 +1,8 @@
 {
-    "title": "{{ cookiecutter.model_name }}",
+    "title": "{{ cookiecutter.project_name }}",
     "summary": "{{ cookiecutter.description.replace('\'', '') }}",
     "description": [
-        "{{ cookiecutter.model_name }} is an application using the DEEPaaS API.\n",
+        "{{ cookiecutter.project_name }} is an application using the DEEPaaS API.\n",
         "{{ cookiecutter.description.replace('\'', '') }}"
     ],
     "keywords": [
@@ -12,14 +12,14 @@
     "license": "{{ cookiecutter.open_source_license }}",
     "date_creation": "{% now 'utc', '%Y-%m-%d' %}",
     "sources": {
-        "dockerfile_repo": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}",
-        "docker_registry_repo": "{{ cookiecutter.dockerhub_user }}/{{ cookiecutter.package_slug }}",
-        "code": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }}",
+        "dockerfile_repo": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}",
+        "docker_registry_repo": "{{ cookiecutter.dockerhub_user }}/{{ cookiecutter.__repo_name }}",
+        "code": "{{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }}",
         "ai4_template": "{{ cookiecutter.__ai4_template }}"
     },
     "continuous_integration": {
-        "build_status_badge": "https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/{{ cookiecutter.package_slug }}/main",
-        "build_status_url": "https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/{{ cookiecutter.package_slug }}/job/main/"
+        "build_status_badge": "https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/{{ cookiecutter.__repo_name }}/main",
+        "build_status_url": "https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/{{ cookiecutter.__repo_name }}/job/main/"
     },
     "tosca": [
         {

@@ -77,17 +77,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/{{ cookiecutter.package_slug }}.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/{{ cookiecutter.__repo_name }}.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/{{ cookiecutter.package_slug }}.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/{{ cookiecutter.__repo_name }}.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/{{ cookiecutter.package_slug }}"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/{{ cookiecutter.package_slug }}"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/{{ cookiecutter.__repo_name }}"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/{{ cookiecutter.__repo_name }}"
 	@echo "# devhelp"
 
 epub:

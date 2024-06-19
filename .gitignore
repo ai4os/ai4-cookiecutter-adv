@@ -68,9 +68,9 @@ target/
 
 # VS Code
 .vscode/*
-!{{ cookiecutter.package_slug }}/.vscode/*
-!{{ cookiecutter.package_slug }}/.vscode/launch.json
-!{{ cookiecutter.package_slug }}/.vscode/settings.json
+!{{ cookiecutter.__repo_name }}/.vscode/*
+!{{ cookiecutter.__repo_name }}/.vscode/launch.json
+!{{ cookiecutter.__repo_name }}/.vscode/settings.json
 
 # Spyder
 .spyproject/
