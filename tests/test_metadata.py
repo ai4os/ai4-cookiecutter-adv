@@ -16,5 +16,6 @@ def test_title(metadata, project_name):
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_summary(metadata, project_name):
     raise NotImplementedError  # TODO: implement your test here
