@@ -1,9 +1,6 @@
 {
     "git_base_url": "https://github.com/ai4os-hub",
-    "model_name": "",
-    "__model_source": "{{ cookiecutter.model_name|lower|replace(' ', '_')|replace('-', '_') }}",
-    "package_slug": "{{ cookiecutter.model_name|lower|replace(' ', '-') ~ '-api' }}",
-    "package_name": "{{ cookiecutter.model_name|lower|replace(' ', '_') ~ '_api' }}",
+    "project_name": "",
     "add_model_template": true,
     "add_model_from_repo": "",
     "author_name": "",
@@ -17,13 +14,13 @@
     "baseimage_gpu_tag": "2.9.1-gpu",
     "failure_notify": false,
 
+    "__repo_name": "{{ ' '.join(cookiecutter.project_name.split()).lower().replace(' ', '-') }}",
+    "__app_name": "{{ cookiecutter.__repo_name.replace('-','_') }}",
     "__ai4_template": "ai4-template-adv/2.0.1",
 
     "__prompts__": {
         "git_base_url": "\nRemote URL to host your new repositories (git), e.g.\n\thttps://github.com/ai4os-hub (i.e. at github)\n",
-        "model_name": "\nName of the model (without 'api')\n",
-        "package_slug": "\nURL-friendly version of the model api name.\nThis makes it suitable for use in URLs, filenames and other places.\n",
-        "package_name": "\nUnique identifier for the model api package.\nAlso defines the repository name, added after \"git_base_url\" (see above).\n\tShould be a valid Python name\n",
+        "project_name": "project_name - Short name of your project (max 4 words)",
         "add_model_template": "\nCreate a folder template to start a model from the base.\n",
         "add_model_from_repo": "\nIntegrate a model from a git repository as git submodule, e.g.\n\tgit@github.com:your_organization/model_name.git\n\tIgnored if `add_model_template`\n",
         "author_name": "\nAuthor name(s) (and/or your organization/company/team).\n\tIf many, separate by comma\n",
