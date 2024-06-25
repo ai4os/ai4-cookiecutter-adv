@@ -1,4 +1,5 @@
 """Pytest configuration file for cookiecutter-AI4EOSC project."""
+
 # pylint: disable=redefined-outer-name
 import os
 import tempfile
@@ -38,7 +39,7 @@ def create_testdir(config_file):
 
 
 @pytest.fixture(scope="session", name="project")
-def bake_project(cookiecutter_path, testdir, config_args, model_name):
+def bake_project(cookiecutter_path, testdir, config_args, project_name):
     """Fixture to bake a project from a cookiecutter template."""
     cookiecutter(
         template=str(cookiecutter_path),
@@ -46,7 +47,7 @@ def bake_project(cookiecutter_path, testdir, config_args, model_name):
         extra_context=config_args,
         output_dir="project",
     )
-    project_dir = model_name.lower().replace(" ", "-") + "-api"
+    project_dir = project_name.lower().replace(" ", "-")
     return Path(testdir) / "project" / project_dir
 
 
@@ -60,21 +61,21 @@ def pyproject(project):
 @pytest.fixture(scope="session")
 def git_base_url(config_args):
     """Fixture to provide git_base_url."""
-    default = "https://github.com/deephdc"
+    default = "https://github.com/ai4os-hub"
     return config_args.get("git_base_url", default)
 
 
 @pytest.fixture(scope="session")
-def model_name(config_args):
-    """Fixture to provide model_name."""
-    return config_args.get("model_name", None)
+def project_name(config_args):
+    """Fixture to provide project_name."""
+    return config_args.get("project_name", None)
 
 
 @pytest.fixture(scope="session")
-def package_slug(config_args, model_name):
-    """Fixture to provide package_slug."""
-    default = f"{model_name.lower().replace(' ', '-')}-api"
-    return config_args.get("package_slug", default)
+def repo_name(config_args, project_name):
+    """Fixture to provide repo_name."""
+    default = f"{project_name.lower().replace(' ', '-')}"
+    return config_args.get("repo_name", default)
 
 
 @pytest.fixture(scope="session")

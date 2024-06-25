@@ -1,4 +1,4 @@
-model_name: "Submodule Test"
+project_name: "Submodule Test"
 add_model_template: false
 add_model_from_repo: git@gitlab.kit.edu:borja.sanchis/test-submodules.git
 author_name: "Borja Esteban"

@@ -11,10 +11,11 @@ def metadata(project):
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_title(metadata, model_name):
-    assert metadata["title"] == model_name
+def test_title(metadata, project_name):
+    assert metadata["title"] == project_name
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_summary(metadata, model_name):
+@pytest.mark.skip(reason="Not implemented yet")
+def test_summary(metadata, project_name):
     raise NotImplementedError  # TODO: implement your test here

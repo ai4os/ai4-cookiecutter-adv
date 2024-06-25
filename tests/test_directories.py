@@ -3,14 +3,14 @@ import os
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "submodule"], indirect=True)
-def test_has_source_folder(project, model_name):
-    model_source = model_name.lower().replace(" ", "_").replace("-", "_")
+def test_has_source_folder(project, project_name):
+    model_source = project_name.lower().replace(" ", "_").replace("-", "_")
     assert os.path.exists(project / model_source)
 
 
 @pytest.mark.parametrize("config_file", ["no-source"], indirect=True)
-def test_no_source_folder(project, model_name):
-    model_source = model_name.lower().replace(" ", "_").replace("-", "_")
+def test_no_source_folder(project, project_name):
+    model_source = project_name.lower().replace(" ", "_").replace("-", "_")
     assert not os.path.exists(project / model_source)
 
 
@@ -30,6 +30,7 @@ def test_data_folder(project):
 
 
 @pytest.mark.parametrize("config_file", ["config-1"], indirect=True)
+@pytest.mark.skip(reason="Not implemented yet")
 def test_docker_folder(project):
     raise NotImplementedError  # TODO: implement your test here
 

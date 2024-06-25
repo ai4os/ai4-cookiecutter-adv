@@ -28,7 +28,7 @@ Organize your project to separate the test code from the main codebase.
 A typical structure for an API ML code might look like this:
 
 ```
-{{ cookiecutter.package_slug }}/
+{{ cookiecutter.__repo_name }}/
 │
 ├── .sqa
 │   ├── config.yml          <-- Software Quality Assurance configuration

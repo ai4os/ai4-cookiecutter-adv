@@ -68,8 +68,8 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
-RUN git clone -b $branch --depth 1 {{ cookiecutter.git_base_url }}/{{ cookiecutter.package_slug }} && \
-    pip3 install --no-cache-dir -e ./{{ cookiecutter.package_slug }}
+RUN git clone -b $branch --depth 1 {{ cookiecutter.git_base_url }}/{{ cookiecutter.__repo_name }} && \
+    pip3 install --no-cache-dir -e ./{{ cookiecutter.__repo_name }}
 
 # Open ports: DEEPaaS (5000), Monitoring (6006), Jupyter (8888)
 EXPOSE 5000 6006 8888
