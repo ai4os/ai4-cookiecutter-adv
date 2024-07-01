@@ -79,7 +79,6 @@ def add_submodule(project_name, submodule_name, submodule_url):
     with context_chdir(Path(f"../{project_name}")):
         subprocess.call(["git", "submodule", "add", submodule_url, submodule_name])
         subprocess.call(["git", "commit", "-m", f"Add {submodule_name} submodule"])
-        subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
 
 
 # -----------------------------------------------------------------------------
