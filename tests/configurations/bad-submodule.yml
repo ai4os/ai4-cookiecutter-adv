@@ -1,0 +1,5 @@
+project_name: "Submodule Test"
+add_model_template: false
+add_model_from_repo: git@github:no-user/not-found-subm.git
+author_name: "Borja Esteban"
+author_email: "borja.sanchis@kit.edu"
