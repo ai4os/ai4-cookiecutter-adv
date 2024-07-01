@@ -13,7 +13,8 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-defaultbranch = 'main'
+defaultbranch = "main"
+
 
 # -----------------------------------------------------------------------------
 # Use contextlib.chdir when python.version >= 3.11
@@ -35,7 +36,7 @@ def adjust_readme(branch):
     with open("README.md", encoding="utf-8") as f_old:
         for line in f_old:
             if "[![Build Status]" in line:
-                line = line.replace("/main)", f"/{branch})")
+                line = line.replace("/main", f"/{branch}")
             readme_content.append(line)
 
     # write changes to README.md
