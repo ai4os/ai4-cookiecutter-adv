@@ -30,3 +30,15 @@ def test_bad_name(cookiecutter_path, config_args):
             output_dir="project",
         )
     assert "Hook script failed" in str(excinfo.value)
+
+
+@pytest.mark.parametrize("config_file", ["bad-submodule"], indirect=True)
+def test_bad_submodule(cookiecutter_path, config_args):
+    with pytest.raises(FailedHookException) as excinfo:
+        cookiecutter(
+            template=str(cookiecutter_path),
+            no_input=True,
+            extra_context=config_args,
+            output_dir="project",
+        )
+    assert "Hook script failed" in str(excinfo.value)
