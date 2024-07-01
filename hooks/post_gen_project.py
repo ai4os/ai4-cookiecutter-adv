@@ -50,10 +50,10 @@ def git_init(base_url, project_name):
     """Function to initialise git repositories"""
     repo = f"{base_url}/{project_name}.git"
     with context_chdir(Path(f"../{project_name}")):
-        subprocess.call(["git", "init", "-b", defaultbranch])
-        subprocess.call(["git", "add", "."])
-        subprocess.call(["git", "commit", "-m", "initial commit"])
-        subprocess.call(["git", "remote", "add", "origin", repo])
+        subprocess.check_call(["git", "init", "-b", defaultbranch])
+        subprocess.check_call(["git", "add", "."])
+        subprocess.check_call(["git", "commit", "-m", "initial commit"])
+        subprocess.check_call(["git", "remote", "add", "origin", repo])
     return repo
 
 
@@ -61,24 +61,28 @@ def create_branch(project_name, branch):
     """Function to create branches"""
     with context_chdir(Path(f"../{project_name}")):
         # create test branch automatically
-        subprocess.call(["git", "checkout", "-b", branch])
+        subprocess.check_call(["git", "checkout", "-b", branch])
 
         # adjust README.md
         adjust_readme(branch)
 
         # commit changes
         commit_msg = "update README.md for the BuildStatus"
-        subprocess.call(["git", "commit", "-a", "-m", commit_msg])
+        subprocess.check_call(["git", "commit", "-a", "-m", commit_msg])
 
         # switch back to master
-        subprocess.call(["git", "checkout", "main"])
+        subprocess.check_call(["git", "checkout", "main"])
 
 
 def add_submodule(project_name, submodule_name, submodule_url):
     """Function to add submodules"""
     with context_chdir(Path(f"../{project_name}")):
-        subprocess.call(["git", "submodule", "add", submodule_url, submodule_name])
-        subprocess.call(["git", "commit", "-m", f"Add {submodule_name} submodule"])
+        subprocess.check_call(
+            ["git", "submodule", "add", submodule_url, submodule_name]
+        )
+        subprocess.check_call(
+            ["git", "commit", "-m", f"Add {submodule_name} submodule"]
+        )
 
 
 # -----------------------------------------------------------------------------
