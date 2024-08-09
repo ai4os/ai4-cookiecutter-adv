@@ -10,7 +10,7 @@ import logging
 
 import {{ cookiecutter.__app_name }} as aimodel
 
-from {{ cookiecutter.__app_name }}.api import config, responses, schemas, utils
+from . import config, responses, schemas, utils
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)
