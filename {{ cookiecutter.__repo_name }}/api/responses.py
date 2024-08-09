@@ -10,7 +10,7 @@ import logging
 
 from fpdf import FPDF
 
-from {{ cookiecutter.__app_name }}.api import config
+from . import config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)
