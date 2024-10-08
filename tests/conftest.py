@@ -59,6 +59,13 @@ def pyproject(project):
 
 
 @pytest.fixture(scope="session")
+def git_base_url(config_args):
+    """Fixture to provide git_base_url."""
+    default = "https://github.com/ai4os-hub"
+    return config_args.get("git_base_url", default)
+
+
+@pytest.fixture(scope="session")
 def project_name(config_args):
     """Fixture to provide project_name."""
     return config_args.get("project_name", None)
