@@ -95,7 +95,7 @@ try:
 
     # Initialise git repository and create test and dev branches
     git_repo_url = git_init(
-        base_url="{{ cookiecutter.git_base_url }}",
+        base_url="{{ cookiecutter.__git_base_url }}",
         project_name="{{ cookiecutter.__repo_name }}",
     )
 

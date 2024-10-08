@@ -2,10 +2,10 @@ import pytest
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)
-def test_git_base_url(pyproject, git_base_url, repo_name):
+def test_git_base_url(pyproject, __git_base_url, repo_name):
     urls = pyproject["project"]["urls"]
-    assert urls["Homepage"] == f"{git_base_url}/{repo_name}"
-    assert urls["Bug Tracker"] == f"{git_base_url}/{repo_name}/issues"
+    assert urls["Homepage"] == f"{__git_base_url}/{repo_name}"
+    assert urls["Bug Tracker"] == f"{__git_base_url}/{repo_name}/issues"
 
 
 @pytest.mark.parametrize("config_file", ["config-1", "config-2"], indirect=True)

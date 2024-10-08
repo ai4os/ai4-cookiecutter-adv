@@ -23,11 +23,11 @@ REQ_TIMEOUT = 1000  # Milliseconds
 
 # -----------------------------------------------------------------------------
 def validate_git_base_url():
-    """Validate git_base_url"""
-    git_base_url = urlparse(url="{{ cookiecutter.git_base_url }}")
-    if not bool(git_base_url.scheme and git_base_url.netloc):
-        logging.error("Invalid git_base_url %s", git_base_url)
-        raise ValueError("Invalid git_base_url")
+    """Validate __git_base_url"""
+    __git_base_url = urlparse(url="{{ cookiecutter.__git_base_url }}")
+    if not bool(__git_base_url.scheme and __git_base_url.netloc):
+        logging.error("Invalid __git_base_url %s", __git_base_url)
+        raise ValueError("Invalid __git_base_url")
 
 
 # -----------------------------------------------------------------------------
