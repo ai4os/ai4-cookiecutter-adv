@@ -22,6 +22,15 @@ REQ_TIMEOUT = 1000  # Milliseconds
 
 
 # -----------------------------------------------------------------------------
+def validate_git_base_url():
+    """Validate __git_base_url"""
+    __git_base_url = urlparse(url="{{ cookiecutter.__git_base_url }}")
+    if not bool(__git_base_url.scheme and __git_base_url.netloc):
+        logging.error("Invalid __git_base_url %s", __git_base_url)
+        raise ValueError("Invalid __git_base_url")
+
+
+# -----------------------------------------------------------------------------
 def validate_project_name():
     """Validate project_name"""
     project_name = "{{ cookiecutter.project_name }}"
@@ -103,6 +112,7 @@ def validate_docker_image():
 # -----------------------------------------------------------------------------
 # If any of the validation, exit with error
 try:
+    validate_git_base_url()
     validate_project_name()
     validate_repo_name()
     validate_app_name()
