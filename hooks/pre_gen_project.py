@@ -9,16 +9,12 @@ import logging
 import re
 from urllib.parse import urlparse
 
-import requests
-import requests.exceptions
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 FOLDER_REGEX = r"^[a-zA-Z0-9_-]+$"
 MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 APP_VERSION_REGEX = r"^\d+\.\d+\.\d+$"
-DOCKER_HUB_API = "https://registry.hub.docker.com/v2"
-REQ_TIMEOUT = 1000  # Milliseconds
 
 
 # -----------------------------------------------------------------------------
@@ -83,38 +79,6 @@ def validate_app_version():
 
 
 # -----------------------------------------------------------------------------
-def validate_docker_image():
-    """Validate docker image in docker hub"""
-    # Construct the URL for Docker Hub API v2
-    image = "{{ cookiecutter.docker_baseimage }}"
-    cpu_tag = "{{ cookiecutter.baseimage_cpu_tag }}"
-    gpu_tag = "{{ cookiecutter.baseimage_gpu_tag }}"
-
-    if len("{{ cookiecutter.docker_baseimage }}".split("/")) > 2:
-        return  # Skip validation for local or non-Docker Hub images
-
-    cpu_image_url = f"{DOCKER_HUB_API}/repositories/{image}/tags/{cpu_tag}"
-    try:
-        response = requests.get(cpu_image_url, timeout=REQ_TIMEOUT)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        err_msg = f"Invalid docker image {image}:{cpu_tag}\n{err}"
-        raise ValueError(err_msg) from err
-    except requests.exceptions.Timeout:
-        pass  # In case of network fail, continue
-
-    gpu_image_url = f"{DOCKER_HUB_API}/repositories/{image}/tags/{gpu_tag}"
-    try:
-        response = requests.get(gpu_image_url, timeout=REQ_TIMEOUT)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError as err:
-        err_msg = f"Invalid docker image {image}:{cpu_tag}\n{err}"
-        raise ValueError(err_msg) from err
-    except requests.exceptions.Timeout:
-        pass  # In case of network fail, continue
-
-
-# -----------------------------------------------------------------------------
 # If any of the validation, exit with error
 try:
     validate_git_base_url()
@@ -123,7 +87,6 @@ try:
     validate_app_name()
     validate_authors()
     validate_app_version()
-    validate_docker_image()
 except ValueError as error:
     logging.error(error, exc_info=True)
     raise SystemExit(1) from error
