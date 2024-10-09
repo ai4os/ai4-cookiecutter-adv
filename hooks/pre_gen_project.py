@@ -90,12 +90,16 @@ def validate_docker_image():
     cpu_tag = "{{ cookiecutter.baseimage_cpu_tag }}"
     gpu_tag = "{{ cookiecutter.baseimage_gpu_tag }}"
 
+    if len("{{ cookiecutter.docker_baseimage }}".split("/")) > 2:
+        return  # Skip validation for local or non-Docker Hub images
+
     cpu_image_url = f"{DOCKER_HUB_API}/repositories/{image}/tags/{cpu_tag}"
     try:
         response = requests.get(cpu_image_url, timeout=REQ_TIMEOUT)
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
-        raise ValueError(f"Invalid docker image {image}:{cpu_tag}\n{err}")
+        err_msg = f"Invalid docker image {image}:{cpu_tag}\n{err}"
+        raise ValueError(err_msg) from err
     except requests.exceptions.Timeout:
         pass  # In case of network fail, continue
 
@@ -104,7 +108,8 @@ def validate_docker_image():
         response = requests.get(gpu_image_url, timeout=REQ_TIMEOUT)
         response.raise_for_status()
     except requests.exceptions.HTTPError as err:
-        raise ValueError(f"Invalid docker image {image}:{cpu_tag}\n{err}")
+        err_msg = f"Invalid docker image {image}:{cpu_tag}\n{err}"
+        raise ValueError(err_msg) from err
     except requests.exceptions.Timeout:
         pass  # In case of network fail, continue
 
@@ -119,6 +124,6 @@ try:
     validate_authors()
     validate_app_version()
     validate_docker_image()
-except ValueError as err:
-    logging.error(err, exc_info=True)
-    raise SystemExit(1) from err
+except ValueError as error:
+    logging.error(error, exc_info=True)
+    raise SystemExit(1) from error
