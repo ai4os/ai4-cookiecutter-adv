@@ -19,7 +19,7 @@
     "__ai4_template": "ai4-template-adv/2.0.1",
 
     "__prompts__": {
-        "project_name": "\nShort name of your project (max 4 words).\nThis is also the name of the module to be imported, e.g `import project_name as aimodel`.\n",
+        "project_name": "\nShort name of your project (max 4 words).\nThe GitHub repository name and python module name are derived from the project_name.\n",
         "add_model_template": "\nCreate a folder template to start a model from the beginning.\n",
         "add_model_from_repo": "\nIntegrate a model from a git repository as git submodule, e.g.\n\tgit@github.com:your_organization/model_name.git.\n\tIgnored if you select to create a folder template from the beginning.\n",
         "author_name": "\nAuthor name(s) (and/or your organization/company/team).\n\tIf many, separate by comma\n",
