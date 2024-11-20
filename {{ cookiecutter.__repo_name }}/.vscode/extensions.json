@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "ms-python.python",
+        "ms-python.isort",
+        "ms-python.black-formatter",
+        "tamasfe.even-better-toml",
+        "iterative.dvc"
+    ]
+}

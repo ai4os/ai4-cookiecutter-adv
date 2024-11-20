@@ -68,6 +68,7 @@ target/
 
 # VS Code
 !{{ cookiecutter.__repo_name }}/.vscode/*
+!{{ cookiecutter.__repo_name }}/.vscode/extensions.json
 !{{ cookiecutter.__repo_name }}/.vscode/launch.json
 !{{ cookiecutter.__repo_name }}/.vscode/settings.json
 # .vscode/*

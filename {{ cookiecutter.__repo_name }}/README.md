@@ -1,8 +1,10 @@
 # {{cookiecutter.__repo_name}}
 
-[![Build Status](https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/{{ cookiecutter.__repo_name }}/main)](https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/{{ cookiecutter.__repo_name }}/job/main)
+[![Build Status](https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/{{ cookiecutter.**repo_name }}/main)](https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/{{ cookiecutter.**repo_name }}/job/main)
 
 {{cookiecutter.description}}
+
+## Usage
 
 To launch it, first install the package then run [deepaas](https://github.com/ai4os/DEEPaaS):
 
@@ -145,3 +147,19 @@ Running the tests with pytest:
 $ pip install -r requirements-test.txt
 $ python -m pytest --numprocesses=auto --dist=loadscope tests
 ```
+
+## Contributing
+
+This module tries to enforce best practices by using [Black](https://github.com/psf/black)
+to format the code.
+
+For an optimal development experience, we recommend installing the VScode extensions
+[Black](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter).
+Their configurations are automatically included in the [`.vscode`](./.vscode) folder.
+This will format the code during the automatic saves, though you can force formatting with
+`CTRL + Shift + I` (or `CTRL + S` to save).
+
+To enable them only for this repository: after installing, click `Disable`,
+then click `Enable (workspace)`.
+
+In the Black _global_ settings, we also recommend setting `black-formatter.showNotification = off`.

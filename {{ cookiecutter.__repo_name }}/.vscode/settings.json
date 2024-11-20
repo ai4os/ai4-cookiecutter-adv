@@ -1,7 +1,9 @@
 {
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
     },
+    "files.autoSave": "afterDelay",
     "cSpell.words": [
         "aimodel",
         "aiohttp",
