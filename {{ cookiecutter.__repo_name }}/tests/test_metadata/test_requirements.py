@@ -22,8 +22,16 @@ the same folder. However, remember to add the prefix `test_` to the file.
 def test_authors(metadata):
     """Tests that metadata provides authors information."""
     assert "author" in metadata
-    assert ", ".join(metadata['author']) == "{{ cookiecutter.author_name }}"
-    assert ", ".join(metadata["author"].values()) == "{{ cookiecutter.author_email }}"
+    assert metadata["author"] == "{{ cookiecutter.author_name }}"
+
+
+def test_emails(metadata):
+    """Tests that metadata provides authors information."""
+    assert "author-email" in metadata
+    email_author = ", ".join(metadata['author-email'])
+    assert email_author == "{{ cookiecutter.author_name }}"
+    email_values = ", ".join(metadata["author-email"].values())
+    assert email_values == "{{ cookiecutter.author_email }}"
 
 
 def test_description(metadata):
