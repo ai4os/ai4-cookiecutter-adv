@@ -75,5 +75,4 @@ RUN git clone -b $branch --depth 1 {{ cookiecutter.__git_base_url }}/{{ cookiecu
 EXPOSE 5000 6006 8888
 
 # Launch deepaas
-ENTRYPOINT [ "deep-start" ]
-CMD ["--deepaas"]
+CMD [ "deep-start", "--deepaas" ]
