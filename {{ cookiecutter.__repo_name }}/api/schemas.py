@@ -73,6 +73,13 @@ class PredArgsSchema(marshmallow.Schema):
 # EXAMPLE of Prediction Output description
 # = HAVE TO MODIFY FOR YOUR NEEDS =
 class PredOutputSchema(marshmallow.Schema):
+    """Prediction output schema for api.predict function."""
+
+    class Meta:  # Keep order of the parameters as they are defined.
+        # pylint: disable=missing-class-docstring
+        # pylint: disable=too-few-public-methods
+        ordered = True
+
     status = fields.String(
         description="Response status message",
         required=True, 
