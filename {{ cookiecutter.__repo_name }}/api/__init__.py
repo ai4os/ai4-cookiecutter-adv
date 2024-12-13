@@ -79,6 +79,10 @@ def predict(model_name, input_file, accept='application/json', **options):
         raise  # Reraise the exception after log
 
 
+# This variable is used to define the predict output schema
+schema = schemas.PredOutputSchema
+
+
 @utils.train_arguments(schema=schemas.TrainArgsSchema)
 def train(model_name, input_file, **options):
     """Performs model training from given input data and parameters.

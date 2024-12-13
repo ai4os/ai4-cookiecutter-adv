@@ -70,6 +70,19 @@ class PredArgsSchema(marshmallow.Schema):
     )
 
 
+# EXAMPLE of Prediction Output description
+# = HAVE TO MODIFY FOR YOUR NEEDS =
+class PredOutputSchema(marshmallow.Schema):
+    status = fields.String(
+        description="Response status message",
+        required=True, 
+    )
+    predictions = fields.Str(
+        description="String containing predictions",
+        required=True, 
+    )
+
+
 # EXAMPLE of Training Args description
 # = HAVE TO MODIFY FOR YOUR NEEDS =
 class TrainArgsSchema(marshmallow.Schema):
